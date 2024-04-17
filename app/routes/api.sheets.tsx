@@ -9,16 +9,13 @@ export const headers: HeadersFunction = () => ({
   "Netlify-CDN-Cache-Control": "public, s-maxage=300, stale-while-revalidate=604800",
 });
 
-
-// Path to your JSON key file 
-const KEYFILEPATH = './credentials.json';
-
 // Specify the scopes needed
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
 // Initialize the auth client
-const auth = new google.auth.GoogleAuth({
-  keyFile: KEYFILEPATH,
+const auth = new google.auth.JWT({
+  email: process.env.GOOGLE_API_EMAIL,
+  key: process.env.GOOGLE_API_KEY,
   scopes: SCOPES
 });
 
