@@ -18,13 +18,14 @@ async function accessSpreadsheet () {
   const spreadsheetId = '1f_TkKzFUN_oABqHxL4mjrmeLlESU9pEeoOphhP8X2Oo';
 
   // Example: Read from the spreadsheet
-  const range = 'Company Emissions Database!A1:AZ12148';
+  const range = 'Company Emissions Database!A:AZ';
   try {
     const response = await sheets.spreadsheets.values.get({
       auth,
       spreadsheetId,
       range,
-    });
+    })
+
     return { data: response }
     console.log(response.data);
   } catch (error) {
