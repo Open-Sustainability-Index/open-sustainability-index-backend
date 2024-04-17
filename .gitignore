@@ -1,2 +1,4 @@
 node_modules
 credentials.json
+.vercel
+.env
