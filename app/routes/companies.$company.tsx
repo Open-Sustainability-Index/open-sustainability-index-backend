@@ -1,10 +1,5 @@
-import { HeadersFunction } from '@remix-run/node';
 import { LoaderFunctionArgs } from '@remix-run/node';
 import { AccessSpreadsheet } from '../services/AccessSpreadsheet';
-
-export const headers: HeadersFunction = () => ({
-  "Cache-Control": "max-age=0, s-maxage=3600",
-});
 
 export async function loader ({ params }: LoaderFunctionArgs) {
   const { data: sheetData, error } = await AccessSpreadsheet();
