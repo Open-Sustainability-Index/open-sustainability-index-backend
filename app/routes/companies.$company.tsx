@@ -16,10 +16,10 @@ export async function loader ({ params }: LoaderFunctionArgs) {
       obj[headers[index]] = dataPoint, {}
       return obj
     }, {})
-  )
+  ).sort((a, b) => parseInt(b.Year) - parseInt(a.Year))
 
   return {
-    data,
+    data: data[0],
     error,
   }
 }
