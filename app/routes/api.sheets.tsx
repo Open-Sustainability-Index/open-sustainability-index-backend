@@ -3,10 +3,7 @@ import { google } from 'googleapis'
 
 
 export const headers: HeadersFunction = () => ({
-  // Tell the browser to always check the freshness of the cache
-  "Cache-Control": "public, max-age=0, must-revalidate",
-  // Tell the CDN to treat it as fresh for 5 minutes, but for a week after that return a stale version while it revalidates
-  "Netlify-CDN-Cache-Control": "public, s-maxage=300, stale-while-revalidate=604800",
+  "Cache-Control": "max-age=0, s-maxage=3600",
 });
 
 // Specify the scopes needed
