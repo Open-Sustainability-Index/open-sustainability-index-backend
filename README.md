@@ -1,3 +1,5 @@
+# Climate Wiki
+
 ## Structure
 
 - /app
