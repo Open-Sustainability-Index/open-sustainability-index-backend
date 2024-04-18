@@ -19,6 +19,7 @@
 
 Create folders:
 
+	mkdir -p app/components/scenes
 	mkdir -p app/components/common
 	mkdir -p app/components/input
 	mkdir -p app/routes/api
