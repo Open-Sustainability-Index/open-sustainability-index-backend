@@ -2,8 +2,8 @@ import { AccessSpreadsheet } from '../services/AccessSpreadsheet';
 
 export async function loader ({ request }: { LoaderFunctionArgs }) {
   const url = new URL(request.url)
-  const limitQueryString = new URL(request.url).searchParams.get('limit')
-  const offsetQueryString = new URL(request.url).searchParams.get('offset')
+  const limitQueryString = url.searchParams.get('limit')
+  const offsetQueryString = url.searchParams.get('offset')
   const limit = limitQueryString ? parseInt(limitQueryString) : 0
   const offset = offsetQueryString ? parseInt(offsetQueryString) : 0
   const { data: sheetData, error } = await AccessSpreadsheet();
