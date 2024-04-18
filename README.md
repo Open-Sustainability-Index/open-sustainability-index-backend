@@ -20,6 +20,7 @@
 Create folders:
 
 	mkdir -p app/components/scenes
+	mkdir -p app/components/page
 	mkdir -p app/components/navigation
 	mkdir -p app/components/common
 	mkdir -p app/components/input
