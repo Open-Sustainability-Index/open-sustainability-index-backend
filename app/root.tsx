@@ -5,7 +5,7 @@ import {
   Scripts,
 } from "@remix-run/react";
 import { ThemeProvider } from '@mui/material/styles'
-import Container from '@mui/material/Container'
+import { Container } from '@mui/material'
 
 import theme from './theme/theme'
 
@@ -22,7 +22,9 @@ export default function App() {
       </head>
       <body>
         <ThemeProvider theme={theme}>
-          <Outlet />
+          <Container>
+            <Outlet />
+          </Container>
         </ThemeProvider>
 
         <Scripts />
