@@ -1,5 +1,4 @@
-import { google } from 'googleapis'
-import { LoaderFunctionArgs } from 'node_modules/@remix-run/node/dist/index';
+import { google } from 'googleapis';
 
 export type GoogleSheetResponse = {
   config: Config;
@@ -62,7 +61,6 @@ export type Request = {
   responseURL: string;
 }
 
-
 // Specify the scopes needed
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 
@@ -74,7 +72,7 @@ const auth = new google.auth.JWT({
 });
 
 // Function to authenticate and access the Sheets API
-async function accessSpreadsheet () {
+export async function AccessSpreadsheet () {
   const sheets = google.sheets({ version: 'v4', auth });
   const spreadsheetId = '1f_TkKzFUN_oABqHxL4mjrmeLlESU9pEeoOphhP8X2Oo';
 
@@ -85,30 +83,14 @@ async function accessSpreadsheet () {
       auth,
       spreadsheetId,
       range,
-    })
+    });
 
     return {
       data: response.data
-    }
+    };
     console.log(response.data);
   } catch (error) {
     console.error('The API returned an error: ' + error);
-    return { error }
+    return { error };
   }
 }
-
-
-export async function loader ({ params }: LoaderFunctionArgs) {
-  // Call the function
-  const { data, error } = await accessSpreadsheet();
-
-  return {
-    data: {
-      company: params.company,
-      ...data,
-    },
-    error
-  }
-}
-
-export type loaderType = typeof loader

@@ -1,33 +1,25 @@
-import { useLoaderData } from '@remix-run/react'
-import { LoaderFunctionArgs } from 'node_modules/@remix-run/node/dist/index'
-import { loaderType } from '../server/loaders/sheet'
-
-export { loader } from '../server/loaders/sheet'
-
 import { HeadersFunction } from '@remix-run/node';
-
+import { LoaderFunctionArgs } from '@remix-run/node';
+import { AccessSpreadsheet } from '../services/AccessSpreadsheet';
 
 export const headers: HeadersFunction = () => ({
   "Cache-Control": "max-age=0, s-maxage=3600",
 });
 
+export async function loader ({ params }: LoaderFunctionArgs) {
+  const { data: sheetData, error } = await AccessSpreadsheet();
+  const headers = sheetData?.values[0]
+  const companies = sheetData?.values.filter(value => value[2].toLowerCase() === params.company.toLowerCase())
 
-export default function Company () {
+  const data = companies?.map(company =>
+    company?.reduce((obj, dataPoint, index) => {
+      obj[headers[index]] = dataPoint, {}
+      return obj
+    }, {})
+  )
 
-  const {
+  return {
     data,
     error,
-  } = useLoaderData<loaderType>()
-
-  const company = data.values.find(value =>
-    value[2].toLowerCase() === data.company.toLowerCase()
-  )
-
-
-
-  return (
-    <>
-      {JSON.stringify(company)}
-    </>
-  )
+  }
 }
