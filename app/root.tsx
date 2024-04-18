@@ -6,14 +6,13 @@ import {
   Scripts,
 } from "@remix-run/react";
 import { ThemeProvider } from '@mui/material/styles'
-import muiPackages from '@mui/material'
+import CssBaseline from '@mui/material/CssBaseline'
+import Container from '@mui/material/Container'
 
 import theme from './theme/theme'
 import styles from "./theme/global.css?url"
 import Header from './components/navigation/Header';
 import Footer from './components/navigation/Footer';
-
-const { CssBaseline, Container } = muiPackages
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap' },
