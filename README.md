@@ -25,6 +25,7 @@ Create folders:
 	mkdir -p app/routes/api
 	mkdir -p app/hooks
 	mkdir -p app/theme
+	touch app/theme/global.css
 	mkdir -p app/services
 	mkdir -p app/utils
 	mkdir -p server/loaders
