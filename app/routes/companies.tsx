@@ -12,8 +12,25 @@ export async function loader () {
     }
   })
 
+  const uniqueItems = {};
+  data.forEach(item => {
+    if (!uniqueItems[item.Name]) {
+      uniqueItems[item.Name] = {
+        Name: item.Name,
+        Industry: item.Industry,
+        Year: [item.Year]
+      };
+    } else {
+      if (!uniqueItems[item.Name].Year.includes(item.Year)) {
+        uniqueItems[item.Name].Year.push(item.Year);
+      }
+    }
+  });
+
+  const deduplicatedArray = Object.values(uniqueItems);
+
   return {
-    data,
+    data: deduplicatedArray,
     error,
   }
 }
