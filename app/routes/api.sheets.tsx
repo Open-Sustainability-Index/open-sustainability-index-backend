@@ -15,7 +15,7 @@ const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 // Initialize the auth client
 const auth = new google.auth.JWT({
   email: process.env.GOOGLE_API_EMAIL,
-  key: process.env.GOOGLE_API_KEY.replace(/\\n/g, '\n'),
+  key: process.env.GOOGLE_API_KEY?.replace(/\\n/g, '\n'),
   scopes: SCOPES
 });
 
