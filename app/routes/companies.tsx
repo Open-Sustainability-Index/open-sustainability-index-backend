@@ -5,8 +5,8 @@ export async function loader () {
 
   const data = sheetData?.values.map(value => {
     return {
-      name: value[2],
-      industry: value[3],
+      Name: value[2],
+      Industry: value[3],
     }
   })
 
