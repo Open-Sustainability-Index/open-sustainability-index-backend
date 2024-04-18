@@ -26,9 +26,14 @@ export async function loader ({ params, request }: LoaderFunctionArgs) {
     });
   }
 
-
-  return {
-    data: data[0],
-    error,
+  if (data?.length) {
+    return {
+      data: data[0],
+      error,
+    }
   }
+
+  throw new Response("Not Found", {
+    status: 404,
+  });
 }
