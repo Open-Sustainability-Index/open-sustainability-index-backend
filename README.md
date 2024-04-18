@@ -30,6 +30,7 @@ Create folders:
 	mkdir -p app/utils
 	mkdir -p server/loaders
 	mkdir -p server/actions
+	mkdir -p server/utils
 	mkdir -p config
 	mkdir -p public
 	mkdir -p db/migrations
