@@ -26,7 +26,8 @@ Create folders:
 	mkdir -p app/hooks
 	mkdir -p app/services
 	mkdir -p app/utils
-	mkdir -p loaders
+	mkdir -p server/loaders
+	mkdir -p server/actions
 	mkdir -p config
 	mkdir -p public
 	mkdir -p db/migrations
