@@ -4,6 +4,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
   const url = new URL(request.url)
   const limitQueryString = url.searchParams.get('limit')
   const offsetQueryString = url.searchParams.get('offset')
+  const nameQueryString = url.searchParams.get('name')
   const limit = limitQueryString ? parseInt(limitQueryString) : 0
   const offset = offsetQueryString ? parseInt(offsetQueryString) : 0
   const { data: sheetData, error } = await AccessSpreadsheet();
@@ -17,8 +18,21 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
     }
   })
 
+  const filteredByName = filterByName(data, nameQueryString)
+  const uniqueItems = filterUnique(filteredByName);
+  const deduplicatedArray = Object.values(uniqueItems);
+
+  return {
+    data: limit ?
+      deduplicatedArray.slice(offset + 1, offset + limit + 1)
+      : deduplicatedArray.slice(1),
+    error,
+  }
+}
+
+function filterUnique (filteredByName: { [x: string]: string; }[] | undefined) {
   const uniqueItems = {};
-  data.forEach(item => {
+  filteredByName.forEach(item => {
     if (!uniqueItems[item.Name]) {
       uniqueItems[item.Name] = {
         Name: item.Name,
@@ -31,13 +45,11 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
       }
     }
   });
+  return uniqueItems;
+}
 
-  const deduplicatedArray = Object.values(uniqueItems);
-
-  return {
-    data: limit ?
-      deduplicatedArray.slice(offset + 1, offset + limit + 1)
-      : deduplicatedArray.slice(1),
-    error,
-  }
+function filterByName (data: { [x: string]: string; }[] | undefined, nameQueryString: string | null) {
+  if (nameQueryString)
+    return data?.filter(item => item.Name.toLowerCase().includes(nameQueryString?.toLowerCase()));
+  return data
 }
