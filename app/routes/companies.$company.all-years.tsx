@@ -3,7 +3,11 @@ import { fromSlug } from '../utils/fromSlug';
 import { AccessSpreadsheet } from '../services/AccessSpreadsheet';
 
 export async function loader ({ params }: LoaderFunctionArgs) {
-  const { data: sheetData, error } = await AccessSpreadsheet();
+  const { data: sheetData, error } = await AccessSpreadsheet({
+    spreadsheetId: process.env.EMISSIONS_DB_ID,
+    range: process.env.EMISSIONS_DB_RANGE,
+  });
+
   const headers = sheetData?.values[0]
   const companies = sheetData?.values.filter(value => value[2].toLowerCase() === fromSlug(params.company))
 

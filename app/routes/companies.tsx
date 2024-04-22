@@ -7,7 +7,10 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
   const nameQueryString = url.searchParams.get('name')
   const limit = limitQueryString ? parseInt(limitQueryString) : 0
   const offset = offsetQueryString ? parseInt(offsetQueryString) : 0
-  const { data: sheetData, error } = await AccessSpreadsheet();
+  const { data: sheetData, error } = await AccessSpreadsheet({
+    spreadsheetId: process.env.EMISSIONS_DB_ID,
+    range: process.env.EMISSIONS_DB_RANGE,
+  });
   const headers = sheetData?.values[0]
 
   const data = sheetData?.values.map(value => {

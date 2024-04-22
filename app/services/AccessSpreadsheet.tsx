@@ -72,12 +72,15 @@ const auth = new google.auth.JWT({
 });
 
 // Function to authenticate and access the Sheets API
-export async function AccessSpreadsheet () {
+export async function AccessSpreadsheet ({
+  spreadsheetId,
+  range,
+}: {
+  spreadsheetId: string,
+  range: string,
+}) {
   const sheets = google.sheets({ version: 'v4', auth });
-  const spreadsheetId = '1f_TkKzFUN_oABqHxL4mjrmeLlESU9pEeoOphhP8X2Oo';
 
-  // Example: Read from the spreadsheet
-  const range = 'Company Emissions Database!A:AZ';
   try {
     const response: GoogleSheetResponse = await sheets.spreadsheets.values.get({
       auth,
@@ -88,7 +91,7 @@ export async function AccessSpreadsheet () {
     return {
       data: response.data
     };
-    console.log(response.data);
+
   } catch (error) {
     console.error('The API returned an error: ' + error);
     return { error };

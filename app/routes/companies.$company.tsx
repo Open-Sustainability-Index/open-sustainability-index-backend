@@ -4,7 +4,10 @@ import { AccessSpreadsheet } from '../services/AccessSpreadsheet';
 
 export async function loader ({ params, request }: LoaderFunctionArgs) {
   const year = new URL(request.url).searchParams.get('year');
-  const { data: sheetData, error } = await AccessSpreadsheet();
+  const { data: sheetData, error } = await AccessSpreadsheet({
+    spreadsheetId: process.env.EMISSIONS_DB_ID,
+    range: process.env.EMISSIONS_DB_RANGE,
+  });
   const headers = sheetData?.values[0]
   const companies = sheetData?.values.filter(value => value[2].toLowerCase() === fromSlug(params.company))
 
