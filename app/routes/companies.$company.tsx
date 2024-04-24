@@ -12,7 +12,7 @@ export async function loader ({ params, request }: LoaderFunctionArgs) {
     emissions:emission(*),
     targets:target(*),
     commitment:commitment(*)
-  `).eq('company_name', fromSlug(params.company))
+  `).eq('company_name', fromSlug(params.company)).single()
 
   return {
     data,
