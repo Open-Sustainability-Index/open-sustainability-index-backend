@@ -1,4 +1,6 @@
+import { createSupabaseServerClient } from '../supabase.server';
 import { AccessSpreadsheet } from '../services/AccessSpreadsheet';
+import { LoaderFunctionArgs } from "@remix-run/node";
 
 export async function loader ({ request }: { LoaderFunctionArgs }) {
   const url = new URL(request.url)
@@ -7,52 +9,13 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
   const nameQueryString = url.searchParams.get('name')
   const limit = limitQueryString ? parseInt(limitQueryString) : 0
   const offset = offsetQueryString ? parseInt(offsetQueryString) : 0
-  const { data: sheetData, error } = await AccessSpreadsheet({
-    spreadsheetId: process.env.EMISSIONS_DB_ID,
-    range: process.env.EMISSIONS_DB_RANGE,
-  });
-  const headers = sheetData?.values[0]
 
-  const data = sheetData?.values.map(value => {
-    return {
-      [headers[1]]: value[1],
-      [headers[2]]: value[2],
-      [headers[3]]: value[3],
-    }
-  })
+  const { supabaseClient } = createSupabaseServerClient(request)
 
-  const filteredByName = filterByName(data, nameQueryString)
-  const uniqueItems = filterUnique(filteredByName);
-  const deduplicatedArray = Object.values(uniqueItems);
+  const { data, error } = await supabaseClient.from('company').select('company_name, industry, emission(year)')
 
   return {
-    data: limit ?
-      deduplicatedArray.slice(offset + 1, offset + limit + 1)
-      : deduplicatedArray.slice(1),
+    data,
     error,
   }
-}
-
-function filterUnique (filteredByName: { [x: string]: string; }[] | undefined) {
-  const uniqueItems = {};
-  filteredByName.forEach(item => {
-    if (!uniqueItems[item.Name]) {
-      uniqueItems[item.Name] = {
-        Name: item.Name,
-        Industry: item.Industry,
-        Year: [item.Year]
-      };
-    } else {
-      if (!uniqueItems[item.Name].Year.includes(item.Year)) {
-        uniqueItems[item.Name].Year.push(item.Year);
-      }
-    }
-  });
-  return uniqueItems;
-}
-
-function filterByName (data: { [x: string]: string; }[] | undefined, nameQueryString: string | null) {
-  if (nameQueryString)
-    return data?.filter(item => item.Name.toLowerCase().includes(nameQueryString?.toLowerCase()));
-  return data
 }

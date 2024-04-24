@@ -5,6 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "gentypes": "cd supabase; npx --yes supabase gen types typescript --local --schema public > ../app/types/supabase/index.d.ts; tsfmt -r ../app/types/supabase/index.d.ts",
     "dev": "remix vite:dev",
     "build": "remix vite:build",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,6 +17,7 @@
     "@remix-run/node": "^2.8.1",
     "@remix-run/react": "^2.8.1",
     "@remix-run/serve": "^2.8.1",
+    "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.42.5",
     "googleapis": "^105.0.0",
     "isbot": "^4.4.0",
