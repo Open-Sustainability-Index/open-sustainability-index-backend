@@ -1,31 +1,20 @@
 import { LoaderFunctionArgs } from '@remix-run/node';
+import { createSupabaseServerClient } from '../supabase.server';
 import { fromSlug } from '../utils/fromSlug';
-import { AccessSpreadsheet } from '../services/AccessSpreadsheet';
 
-export async function loader ({ params }: LoaderFunctionArgs) {
-  const { data: sheetData, error } = await AccessSpreadsheet({
-    spreadsheetId: process.env.EMISSIONS_DB_ID,
-    range: process.env.EMISSIONS_DB_RANGE,
-  });
+export async function loader ({ request, params }: LoaderFunctionArgs) {
+  const { supabaseClient } = createSupabaseServerClient(request)
 
-  const headers = sheetData?.values[0]
-  const companies = sheetData?.values.filter(value => value[2].toLowerCase() === fromSlug(params.company))
+  const { data, error } = await supabaseClient.from('company').select(`
+    *,
+    emissions:emission(*),
+    targets:target(*),
+    commitment:commitment(*)
+  `).eq('company_name', fromSlug(params.company))
 
-  const data = companies?.map(company =>
-    company?.reduce((obj, dataPoint, index) => {
-      obj[headers[index]] = dataPoint, {}
-      return obj
-    }, {})
-  ).sort((a, b) => parseInt(b.Year) - parseInt(a.Year))
-
-  if (data?.length) {
-    return {
-      data: data,
-      error,
-    }
+  return {
+    data,
+    error,
   }
 
-  throw new Response("Not Found", {
-    status: 404,
-  });
 }
