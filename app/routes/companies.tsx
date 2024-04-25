@@ -12,7 +12,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
 
   const { supabaseClient } = createSupabaseServerClient(request)
 
-  const { data, error } = await supabaseClient.from('company').select('company_name, emissions:emission("total_reported_emission_scope_1+2+3",revenue,hq_country_move),commitment(commitment_type,status,commitment_deadline),targets:target(target,type,target_year,scope)')
+  const { data, error } = await supabaseClient.from('company').select('company_name, emissions:emission("total_reported_emission_scope_1+2+3",revenue,hq_country_move,year,industry,currency),commitment(commitment_type,status,commitment_deadline),targets:target(target,type,target_year,scope)')
 
   return {
     data,
