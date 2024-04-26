@@ -1,5 +1,4 @@
 import { createSupabaseServerClient } from '../supabase.server';
-import { AccessSpreadsheet } from '../services/AccessSpreadsheet';
 import { LoaderFunctionArgs } from "@remix-run/node";
 
 export async function loader ({ request }: { LoaderFunctionArgs }) {
