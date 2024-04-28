@@ -25,7 +25,7 @@ create table "public"."commitment" (
 alter table "public"."commitment" enable row level security;
 
 create table "public"."company" (
-    "company_name" character varying not null,
+    "name" character varying not null,
     "industry" text,
     "isic" text,
     "lei" text,
@@ -50,50 +50,50 @@ create table "public"."emission" (
     "fiscal_year" text,
     "company_name" text not null,
     "industry" text,
-    "isic_rev._4." text,
+    "isic_rev_4" text,
     "hq_country_move" text,
-    "scope_1" text,
-    "scope_2" text,
-    "scope_2_type" text,
-    "scope_2_market-based" text,
-    "scope_2_location-based" text,
+    "scope_1" double precision,
+    "scope_2_market_based" text,
+    "scope_2_location_based" text,
     "scope_2_unknown" text,
     "total_scope_3" text,
-    "total_emission_market-based" text,
-    "total_emission_location-based" text,
-    "total_reported_emission_scope_1+2" text,
-    "total_reported_emission_scope_1+2+3" text,
-    "cat._1" text,
-    "cat._2" text,
-    "cat._3" text,
-    "cat._4" text,
-    "cat._5" text,
-    "cat._6" text,
-    "cat._7" text,
-    "cat._8" text,
-    "cat._9" text,
-    "cat._10" text,
-    "cat._11" text,
-    "cat._12" text,
-    "cat._13" text,
-    "cat._14" text,
-    "cat._15" text,
-    "all_cats?" text,
+    "total_emission_market_based" text,
+    "total_emission_location_based" text,
+    "total_reported_emission_scope_1_2" double precision,
+    "total_reported_emission_scope_1_2_3" double precision,
+    "cat_1" text,
+    "cat_2" text,
+    "cat_3" text,
+    "cat_4" text,
+    "cat_5" text,
+    "cat_6" text,
+    "cat_7" text,
+    "cat_8" text,
+    "cat_9" text,
+    "cat_10" text,
+    "cat_11" text,
+    "cat_12" text,
+    "cat_13" text,
+    "cat_14" text,
+    "cat_15" text,
+    "all_cats" text,
     "upstream_scope_3" text,
     "share_upstream_of_scope_3" text,
     "scope_1_share_of_total_upstream_emissions" text,
-    "total_upstream_emissions" text,
-    "revenue" text,
+    "total_upstream_emissions" bigint,
+    "revenue" bigint,
     "currency" text,
-    "revenue_sek" text,
-    "cradle-to-gate_emissions_/_sek" text,
+    "revenue_million" bigint,
+    "cradle_to_gate" double precision,
     "ghg_standard" text,
     "source_emisions_page_move" text,
-    "emission_intensity" text,
-    "source_emission_/_report" text,
+    "emission_intensity" double precision,
+    "source_emission_report" text,
     "emission_page" text,
+    "source_emission_link" text,
     "source_revenue" text,
     "page_revenue" text,
+    "source_revenue_link" text,
     "publication_date" text,
     "comment" text,
     "status" text
@@ -130,9 +130,9 @@ alter table "public"."target" enable row level security;
 
 CREATE UNIQUE INDEX commitment_pkey ON public.commitment USING btree (company_name);
 
-CREATE UNIQUE INDEX company_company_name_key ON public.company USING btree (company_name);
+CREATE UNIQUE INDEX company_company_name_key ON public.company USING btree (name);
 
-CREATE UNIQUE INDEX company_pkey ON public.company USING btree (company_name);
+CREATE UNIQUE INDEX company_pkey ON public.company USING btree (name);
 
 CREATE UNIQUE INDEX emission_pkey ON public.emission USING btree (year, company_name);
 
@@ -146,19 +146,143 @@ alter table "public"."emission" add constraint "emission_pkey" PRIMARY KEY using
 
 alter table "public"."target" add constraint "target_pkey" PRIMARY KEY using index "target_pkey";
 
-alter table "public"."commitment" add constraint "public_commitment_company_name_fkey" FOREIGN KEY (company_name) REFERENCES company(company_name) not valid;
+alter table "public"."commitment" add constraint "public_commitment_company_name_fkey" FOREIGN KEY (company_name) REFERENCES company(name) not valid;
 
 alter table "public"."commitment" validate constraint "public_commitment_company_name_fkey";
 
 alter table "public"."company" add constraint "company_company_name_key" UNIQUE using index "company_company_name_key";
 
-alter table "public"."emission" add constraint "public_emission_company_name_fkey" FOREIGN KEY (company_name) REFERENCES company(company_name) not valid;
+alter table "public"."emission" add constraint "public_emission_new_company_name_fkey" FOREIGN KEY (company_name) REFERENCES company(name) not valid;
 
-alter table "public"."emission" validate constraint "public_emission_company_name_fkey";
+alter table "public"."emission" validate constraint "public_emission_new_company_name_fkey";
 
-alter table "public"."target" add constraint "public_target_company_name_fkey" FOREIGN KEY (company_name) REFERENCES company(company_name) not valid;
+alter table "public"."target" add constraint "public_target_company_name_fkey" FOREIGN KEY (company_name) REFERENCES company(name) not valid;
 
 alter table "public"."target" validate constraint "public_target_company_name_fkey";
+
+set check_function_bodies = off;
+
+CREATE OR REPLACE FUNCTION public.companies(offset_value integer, limit_value integer, sort_by text, sort_order text)
+ RETURNS TABLE(company_name character varying, commitment_type text, status text, commitment_deadline text, total_reported_emission_scope_1_2_3 double precision, revenue bigint, hq_country_move text, year bigint, industry text, currency text, emission_intensity double precision, target_type text, target_scope character varying, target_year bigint, target text)
+ LANGUAGE plpgsql
+AS $function$
+DECLARE
+    query TEXT;
+BEGIN
+    query := 'SELECT 
+               c.name AS company_name, 
+               cm.commitment_type, 
+               cm.status, 
+               cm.commitment_deadline,
+               e.total_reported_emission_scope_1_2_3, 
+               e.revenue, 
+               e.hq_country_move, 
+               e.year, 
+               e.industry, 
+               e.currency,
+               e.emission_intensity,
+               t.type AS target_type,
+               t.scope AS target_scope,
+               t.target_year,
+               t.target
+            FROM company c
+            LEFT JOIN commitment cm ON c.name = cm.company_name
+            LEFT JOIN (
+                SELECT company_name, MAX(year) AS latest_year
+                FROM emission
+                GROUP BY company_name
+            ) latest_emission ON c.name = latest_emission.company_name
+            LEFT JOIN emission e ON c.name = e.company_name AND latest_emission.latest_year = e.year
+            LEFT JOIN target t ON c.name = t.company_name
+            WHERE e.total_reported_emission_scope_1_2_3 IS NOT NULL ';
+
+    query := query || ' ORDER BY ' || sort_by;
+
+    IF sort_order = 'desc' THEN
+        query := query || ' DESC ';
+    END IF;
+
+    query := query || ' OFFSET ' || offset_value || ' LIMIT ' || limit_value || ';';
+
+    -- Execute the dynamically constructed query
+    RETURN QUERY EXECUTE query;
+END;
+$function$
+;
+
+create or replace view "public"."companies_by_intensity" as  SELECT emission.source,
+    emission.year,
+    emission.fiscal_year,
+    emission.company_name,
+    emission.industry,
+    emission.isic_rev_4,
+    emission.hq_country_move,
+    emission.scope_1,
+    emission.scope_2_market_based,
+    emission.scope_2_location_based,
+    emission.scope_2_unknown,
+    emission.total_scope_3,
+    emission.total_emission_market_based,
+    emission.total_emission_location_based,
+    emission.total_reported_emission_scope_1_2,
+    emission.total_reported_emission_scope_1_2_3,
+    emission.cat_1,
+    emission.cat_2,
+    emission.cat_3,
+    emission.cat_4,
+    emission.cat_5,
+    emission.cat_6,
+    emission.cat_7,
+    emission.cat_8,
+    emission.cat_9,
+    emission.cat_10,
+    emission.cat_11,
+    emission.cat_12,
+    emission.cat_13,
+    emission.cat_14,
+    emission.cat_15,
+    emission.all_cats,
+    emission.upstream_scope_3,
+    emission.share_upstream_of_scope_3,
+    emission.scope_1_share_of_total_upstream_emissions,
+    emission.total_upstream_emissions,
+    emission.revenue,
+    emission.currency,
+    emission.revenue_million,
+    emission.cradle_to_gate,
+    emission.ghg_standard,
+    emission.source_emisions_page_move,
+    emission.emission_intensity,
+    emission.source_emission_report,
+    emission.emission_page,
+    emission.source_emission_link,
+    emission.source_revenue,
+    emission.page_revenue,
+    emission.source_revenue_link,
+    emission.publication_date,
+    emission.comment,
+    emission.status
+   FROM emission
+  ORDER BY emission.emission_intensity;
+
+
+create or replace view "public"."company_slug" as  SELECT company.name AS company_name,
+    company.industry,
+    company.isic,
+    company.lei,
+    company.company_url,
+    company.source_reports_page,
+    company.autogenerated_contact,
+    company.sustainability_contact_name,
+    company.sustainability_contact_email,
+    company.sustainability_contact_linkedin,
+    company.sbt_status,
+    company.sbt_near_term_year,
+    company.sbt_near_term_target,
+    company.net_zero_year,
+    regexp_replace(regexp_replace(lower(TRIM(BOTH FROM company.name)), ' |_|-'::text, '-'::text, 'g'::text), '[^a-zA-Z0-9-]'::text, ''::text, 'g'::text) AS slug
+   FROM company;
+
 
 grant delete on table "public"."commitment" to "anon";
 
