@@ -7,11 +7,13 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
   const offsetQueryString = url.searchParams.get('offset')
   const sortByQueryString = url.searchParams.get('sort')
   const sortOrderQueryString = url.searchParams.get('order')
+  const filterIndustry = url.searchParams.get('industry')
 
   const limit_value = limitQueryString ? parseInt(limitQueryString) : 99
   const offset_value = offsetQueryString ? parseInt(offsetQueryString) : 0
   const sort_by = sortByQueryString ?? 'lower(name)'
   const sort_order = sortOrderQueryString ?? 'asc'
+  const industry_filter = filterIndustry
 
   const { supabaseClient } = createSupabaseServerClient(request)
   const { data, error } = await supabaseClient
@@ -20,6 +22,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
       offset_value,
       sort_by,
       sort_order,
+      industry_filter,
     })
 
   return {
