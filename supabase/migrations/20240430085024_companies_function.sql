@@ -1,3 +1,5 @@
+create type "public"."target_info" as ("target_type" text, "target_scope" character varying, "target_year" bigint, "target" text);
+
 drop function if exists "public"."companies"(offset_value integer, limit_value integer, sort_by text, sort_order text);
 
 create table "public"."temp_company" (
@@ -81,8 +83,6 @@ BEGIN
 END;
 $function$
 ;
-
-create type "public"."target_info" as ("target_type" text, "target_scope" character varying, "target_year" bigint, "target" text);
 
 grant delete on table "public"."temp_company" to "anon";
 
