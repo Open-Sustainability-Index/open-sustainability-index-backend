@@ -1,6 +1,71 @@
 import { createSupabaseServerClient } from '../supabase.server';
 import { LoaderFunctionArgs } from "@remix-run/node";
 
+/**
+ * @openapi
+ * /v1/companies:
+ *   get:
+ *     description: Get companies
+ *     tags:
+ *       - Companies
+ *     parameters:
+ *      - in: query
+ *        name: api-key
+ *        required: true
+ *        description: your unique key
+ *        schema:
+ *          type: string
+ *          default: demo
+ *      - in: query
+ *        name: limit
+ *        description: max records to return
+ *        schema:
+ *          type: integer
+ *          default: 99
+ *      - in: query
+ *        name: offset
+ *        description: Number of items to skip, used for pagination
+ *        schema:
+ *          type: integer
+ *          default: 0
+ *      - in: query
+ *        name: sort
+ *        description: sort by this attribute value
+ *        schema:
+ *          type: string
+ *      - in: query
+ *        name: order
+ *        description: order the sorted results ascending or descending
+ *        schema:
+ *          type: string
+ *          enum:
+ *          - asc
+ *          - desc
+ *      - in: query
+ *        name: industry
+ *        description: return only companies within this industry
+ *        schema:
+ *          type: string
+ *      - in: query
+ *        name: industry
+ *        description: return only companies within this industry
+ *        schema:
+ *          type: string
+ *      - in: query
+ *        name: near-term
+ *        description: filter based on near-term status
+ *        schema:
+ *          type: string
+ *      - in: query
+ *        name: net-zero
+ *        description: filter based on net-zero status
+ *        schema:
+ *          type: string
+ *     responses:
+ *       200:
+ *         description: Returns array companies, their emissions, and targets
+ */
+
 export async function loader ({ request }: { LoaderFunctionArgs }) {
   const url = new URL(request.url)
   const limitQueryString = url.searchParams.get('limit')
