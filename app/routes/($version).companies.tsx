@@ -47,11 +47,6 @@ import { LoaderFunctionArgs } from "@remix-run/node";
  *        schema:
  *          type: string
  *      - in: query
- *        name: industry
- *        description: return only companies within this industry
- *        schema:
- *          type: string
- *      - in: query
  *        name: near-term
  *        description: filter based on near-term status
  *        schema:
