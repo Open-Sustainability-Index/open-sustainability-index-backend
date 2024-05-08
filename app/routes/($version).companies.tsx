@@ -1,5 +1,6 @@
 import { createSupabaseServerClient } from '../supabase.server';
 import { LoaderFunctionArgs } from "@remix-run/node";
+import { authenticate } from '../lib/authenticate';
 
 /**
  * @openapi
@@ -62,7 +63,8 @@ import { LoaderFunctionArgs } from "@remix-run/node";
  */
 
 export async function loader ({ request }: { LoaderFunctionArgs }) {
-  const url = new URL(request.url)
+  const url = authenticate({ request });
+
   const limitQueryString = url.searchParams.get('limit')
   const offsetQueryString = url.searchParams.get('offset')
   const sortByQueryString = url.searchParams.get('sort')
