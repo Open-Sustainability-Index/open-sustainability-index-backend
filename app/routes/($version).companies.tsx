@@ -13,13 +13,13 @@ import { authenticate } from '../lib/authenticate';
  *      - in: query
  *        name: api-key
  *        required: true
- *        description: your unique key
+ *        description: Your unique key
  *        schema:
  *          type: string
  *          default: demo
  *      - in: query
  *        name: limit
- *        description: max records to return
+ *        description: Max records to return
  *        schema:
  *          type: integer
  *          default: 99
@@ -31,12 +31,12 @@ import { authenticate } from '../lib/authenticate';
  *          default: 0
  *      - in: query
  *        name: sort
- *        description: sort by this attribute value
+ *        description: Sort by this attribute value
  *        schema:
  *          type: string
  *      - in: query
  *        name: order
- *        description: order the sorted results ascending or descending
+ *        description: Order the sorted results ascending or descending
  *        schema:
  *          type: string
  *          enum:
@@ -44,22 +44,87 @@ import { authenticate } from '../lib/authenticate';
  *          - desc
  *      - in: query
  *        name: industry
- *        description: return only companies within this industry
+ *        description: Return only companies within this industry
  *        schema:
  *          type: string
  *      - in: query
  *        name: near-term
- *        description: filter based on near-term status
+ *        description: Filter based on near-term status
  *        schema:
  *          type: string
  *      - in: query
  *        name: net-zero
- *        description: filter based on net-zero status
+ *        description: Filter based on net-zero status
  *        schema:
  *          type: string
  *     responses:
  *       200:
- *         description: Returns array companies, their emissions, and targets
+ *         description: Returns array of companies, their emissions, and targets
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   description: List of companies, their emissions, and targets
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       company_name:
+ *                         type: string
+ *                         description: The name of the company
+ *                       industry:
+ *                         type: string
+ *                         description: The industry of the company
+ *                       commitment_type:
+ *                         type: string
+ *                         description: The type of commitment
+ *                       status:
+ *                         type: string
+ *                         description: The status of the commitment
+ *                       commitment_deadline:
+ *                         type: string
+ *                         description: The deadline of the commitment
+ *                       total_reported_emission_scope_1_2_3:
+ *                         type: integer
+ *                         description: Total reported emissions for scope 1, 2, and 3
+ *                       revenue:
+ *                         type: integer
+ *                         description: The revenue of the company
+ *                       hq_country_move:
+ *                         type: string
+ *                         description: The country where the company's headquarters are located
+ *                       year:
+ *                         type: integer
+ *                         description: The year
+ *                       currency:
+ *                         type: string
+ *                         description: The currency used
+ *                       emission_intensity:
+ *                         type: number
+ *                         description: The emission intensity
+ *                       targets:
+ *                         type: array
+ *                         description: List of targets set by the company
+ *                         items:
+ *                           type: object
+ *                           properties:
+ *                             target_type:
+ *                               type: string
+ *                               description: The type of target
+ *                             target_scope:
+ *                               type: string
+ *                               description: The scope of the target
+ *                             target_year:
+ *                               type: integer
+ *                               description: The year of the target
+ *                             target:
+ *                               type: string
+ *                               description: The target itself
+ *                 error:
+ *                   type: object
+ *                   description: Error object if there is any issue with the request
  */
 
 export async function loader ({ request }: { LoaderFunctionArgs }) {
