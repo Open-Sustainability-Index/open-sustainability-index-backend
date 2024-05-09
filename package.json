@@ -15,9 +15,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@remix-run/node": "^2.8.1",
-    "@remix-run/react": "^2.8.1",
-    "@remix-run/serve": "^2.8.1",
+    "@remix-run/node": "^2.9.1",
+    "@remix-run/react": "^2.9.1",
+    "@remix-run/serve": "^2.9.1",
     "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.42.7",
     "googleapis": "^105.0.0",
@@ -27,7 +27,7 @@
     "swagger-jsdoc": "^6.2.8"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.8.1",
+    "@remix-run/dev": "^2.9.1",
     "vite": "^5.2.9"
   }
 }
