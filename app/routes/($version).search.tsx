@@ -6,7 +6,7 @@ import { authenticate } from '../lib/authenticate';
  * @openapi
  * /v1/search:
  *   get:
- *     description: Search for companies by name
+ *     description: Search for companies/industries by name
  *     tags:
  *       - Search
  *     parameters:
@@ -40,7 +40,7 @@ import { authenticate } from '../lib/authenticate';
  *           default: demo
  *     responses:
  *       200:
- *         description: Returns a list of companies matching the search query
+ *         description: Returns a list of companies/industries matching the search query
  *         content:
  *           application/json:
  *             schema:
@@ -48,19 +48,19 @@ import { authenticate } from '../lib/authenticate';
  *               properties:
  *                 data:
  *                   type: array
- *                   description: List of companies matching the search query
+ *                   description: List of companies/industries matching the search query
  *                   items:
  *                     type: object
  *                     properties:
  *                       name:
  *                         type: string
- *                         description: The name of the company
+ *                         description: The name of the company/industry
  *                       slug:
  *                         type: string
- *                         description: The slug of the company
+ *                         description: The slug of the company/industry
  *                       type:
  *                         type: string
- *                         description: Type of the entity (e.g., company)
+ *                         description: Type of the entity (e.g. company/industry)
  *                 error:
  *                   type: object
  *                   description: Error object if there is any issue with the request
