@@ -12,7 +12,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
   const filterIndustry = url.searchParams.get('industry')
   const filterNearTerm = url.searchParams.get('near-term')
   const filterNetZero = url.searchParams.get('net-zero')
-  const emissions_required = url.searchParams.get('emissions')
+  const required = url.searchParams.get('required')
 
   const limit_value = limitQueryString ? parseInt(limitQueryString) : 99
   const offset_value = offsetQueryString ? parseInt(offsetQueryString) : 0
@@ -20,6 +20,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
   const sort_order = sortOrderQueryString ?? 'asc'
   const industry_filter = filterIndustry
   const near_term_filter = filterNearTerm?.toLowerCase() === 'commited'
+  const emissions_required = required?.includes('emissions') ? 'required' : undefined
 
   let commitment_type_filter,
     commitment_status_filter,
