@@ -9,7 +9,8 @@
     "gentypes": "cd supabase; npx --yes supabase gen types typescript --local --schema public > ../app/types/supabase/index.d.ts; tsfmt -r ../app/types/supabase/index.d.ts",
     "dev": "remix vite:dev",
     "build": "npm run genopenapi && remix vite:build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "supabase": "npx supabase stop --project-id basejump-climate && npx supabase start"
   },
   "keywords": [],
   "author": "",
