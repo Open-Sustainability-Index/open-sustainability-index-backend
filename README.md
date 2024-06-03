@@ -122,3 +122,7 @@ v2:
 	--  'Active',               -- commitment_status_filter
 	--  'Target 1'              -- target_target_filter
 	);
+
+Get SQL code:
+
+	SELECT pg_get_functiondef('companies_v2'::regproc);
