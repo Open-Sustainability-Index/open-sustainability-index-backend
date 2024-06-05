@@ -12,68 +12,38 @@ export type Database = {
       commitment: {
         Row: {
           action: string | null
-          base_year: string | null
           commitment_deadline: string | null
           commitment_type: string | null
           company_name: string
-          company_temperature_alignment: string | null
+          created_at: string | null
           date_published: string | null
-          full_target_language: string | null
-          lei: string | null
           reason_for_commitment_extension_or_removal: string | null
-          scope: string | null
           status: string | null
-          "sub-type": string | null
-          target: string | null
-          target_classification: string | null
-          target_value: string | null
-          target_wording: string | null
-          target_year: string | null
-          type: string | null
+          updated_at: string | null
           year_type: string | null
         }
         Insert: {
           action?: string | null
-          base_year?: string | null
           commitment_deadline?: string | null
           commitment_type?: string | null
           company_name: string
-          company_temperature_alignment?: string | null
+          created_at?: string | null
           date_published?: string | null
-          full_target_language?: string | null
-          lei?: string | null
           reason_for_commitment_extension_or_removal?: string | null
-          scope?: string | null
           status?: string | null
-          "sub-type"?: string | null
-          target?: string | null
-          target_classification?: string | null
-          target_value?: string | null
-          target_wording?: string | null
-          target_year?: string | null
-          type?: string | null
+          updated_at?: string | null
           year_type?: string | null
         }
         Update: {
           action?: string | null
-          base_year?: string | null
           commitment_deadline?: string | null
           commitment_type?: string | null
           company_name?: string
-          company_temperature_alignment?: string | null
+          created_at?: string | null
           date_published?: string | null
-          full_target_language?: string | null
-          lei?: string | null
           reason_for_commitment_extension_or_removal?: string | null
-          scope?: string | null
           status?: string | null
-          "sub-type"?: string | null
-          target?: string | null
-          target_classification?: string | null
-          target_value?: string | null
-          target_wording?: string | null
-          target_year?: string | null
-          type?: string | null
+          updated_at?: string | null
           year_type?: string | null
         }
         Relationships: [
@@ -83,13 +53,6 @@ export type Database = {
             isOneToOne: true
             referencedRelation: "company"
             referencedColumns: ["name"]
-          },
-          {
-            foreignKeyName: "commitment_company_name_fkey"
-            columns: ["company_name"]
-            isOneToOne: true
-            referencedRelation: "company_slug"
-            referencedColumns: ["company_name"]
           },
         ]
       }
@@ -103,11 +66,7 @@ export type Database = {
           isic: string | null
           lei: string | null
           name: string
-          net_zero_year: string | null
-          sbt_near_term_target: string | null
-          sbt_near_term_year: string | null
-          sbt_status: string | null
-          source_reports_page: string | null
+          slug: string | null
           updated_at: string
         }
         Insert: {
@@ -119,11 +78,7 @@ export type Database = {
           isic?: string | null
           lei?: string | null
           name: string
-          net_zero_year?: string | null
-          sbt_near_term_target?: string | null
-          sbt_near_term_year?: string | null
-          sbt_status?: string | null
-          source_reports_page?: string | null
+          slug?: string | null
           updated_at?: string
         }
         Update: {
@@ -135,11 +90,7 @@ export type Database = {
           isic?: string | null
           lei?: string | null
           name?: string
-          net_zero_year?: string | null
-          sbt_near_term_target?: string | null
-          sbt_near_term_year?: string | null
-          sbt_status?: string | null
-          source_reports_page?: string | null
+          slug?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -147,164 +98,155 @@ export type Database = {
       emission: {
         Row: {
           all_cats: string | null
-          cat_1: string | null
-          cat_10: string | null
-          cat_11: string | null
-          cat_12: string | null
-          cat_13: string | null
-          cat_14: string | null
-          cat_15: string | null
-          cat_2: string | null
-          cat_3: string | null
-          cat_4: string | null
-          cat_5: string | null
-          cat_6: string | null
-          cat_7: string | null
-          cat_8: string | null
-          cat_9: string | null
-          comment: string | null
+          cat_1: number | null
+          cat_10: number | null
+          cat_11: number | null
+          cat_12: number | null
+          cat_13: number | null
+          cat_14: number | null
+          cat_15: number | null
+          cat_2: number | null
+          cat_3: number | null
+          cat_4: number | null
+          cat_5: number | null
+          cat_6: number | null
+          cat_7: number | null
+          cat_8: number | null
+          cat_9: number | null
           company_name: string
           cradle_to_gate: number | null
+          created_at: string | null
           currency: string | null
           emission_intensity: number | null
           emission_page: string | null
           fiscal_year: string | null
           ghg_standard: string | null
-          hq_country_move: string | null
-          industry: string | null
-          isic_rev_4: string | null
           page_revenue: string | null
           publication_date: string | null
           revenue: number | null
           revenue_million: number | null
           scope_1: number | null
-          scope_1_share_of_total_upstream_emissions: string | null
-          scope_2_location_based: string | null
-          scope_2_market_based: string | null
-          scope_2_unknown: string | null
-          share_upstream_of_scope_3: string | null
-          source: string | null
-          source_emisions_page_move: string | null
+          scope_1_share_of_total_upstream_emissions: number | null
+          scope_2_location_based: number | null
+          scope_2_market_based: number | null
+          scope_2_unknown: number | null
+          share_upstream_of_scope_3: number | null
           source_emission_link: string | null
           source_emission_report: string | null
+          source_emissions_page_move: string | null
           source_revenue: string | null
           source_revenue_link: string | null
           status: string | null
-          total_emission_location_based: string | null
-          total_emission_market_based: string | null
+          total_emission_location_based: number | null
+          total_emission_market_based: number | null
           total_reported_emission_scope_1_2: number | null
           total_reported_emission_scope_1_2_3: number | null
-          total_scope_3: string | null
+          total_scope_3: number | null
           total_upstream_emissions: number | null
-          upstream_scope_3: string | null
+          updated_at: string | null
+          upstream_scope_3: number | null
           year: number
         }
         Insert: {
           all_cats?: string | null
-          cat_1?: string | null
-          cat_10?: string | null
-          cat_11?: string | null
-          cat_12?: string | null
-          cat_13?: string | null
-          cat_14?: string | null
-          cat_15?: string | null
-          cat_2?: string | null
-          cat_3?: string | null
-          cat_4?: string | null
-          cat_5?: string | null
-          cat_6?: string | null
-          cat_7?: string | null
-          cat_8?: string | null
-          cat_9?: string | null
-          comment?: string | null
+          cat_1?: number | null
+          cat_10?: number | null
+          cat_11?: number | null
+          cat_12?: number | null
+          cat_13?: number | null
+          cat_14?: number | null
+          cat_15?: number | null
+          cat_2?: number | null
+          cat_3?: number | null
+          cat_4?: number | null
+          cat_5?: number | null
+          cat_6?: number | null
+          cat_7?: number | null
+          cat_8?: number | null
+          cat_9?: number | null
           company_name: string
           cradle_to_gate?: number | null
+          created_at?: string | null
           currency?: string | null
           emission_intensity?: number | null
           emission_page?: string | null
           fiscal_year?: string | null
           ghg_standard?: string | null
-          hq_country_move?: string | null
-          industry?: string | null
-          isic_rev_4?: string | null
           page_revenue?: string | null
           publication_date?: string | null
           revenue?: number | null
           revenue_million?: number | null
           scope_1?: number | null
-          scope_1_share_of_total_upstream_emissions?: string | null
-          scope_2_location_based?: string | null
-          scope_2_market_based?: string | null
-          scope_2_unknown?: string | null
-          share_upstream_of_scope_3?: string | null
-          source?: string | null
-          source_emisions_page_move?: string | null
+          scope_1_share_of_total_upstream_emissions?: number | null
+          scope_2_location_based?: number | null
+          scope_2_market_based?: number | null
+          scope_2_unknown?: number | null
+          share_upstream_of_scope_3?: number | null
           source_emission_link?: string | null
           source_emission_report?: string | null
+          source_emissions_page_move?: string | null
           source_revenue?: string | null
           source_revenue_link?: string | null
           status?: string | null
-          total_emission_location_based?: string | null
-          total_emission_market_based?: string | null
+          total_emission_location_based?: number | null
+          total_emission_market_based?: number | null
           total_reported_emission_scope_1_2?: number | null
           total_reported_emission_scope_1_2_3?: number | null
-          total_scope_3?: string | null
+          total_scope_3?: number | null
           total_upstream_emissions?: number | null
-          upstream_scope_3?: string | null
+          updated_at?: string | null
+          upstream_scope_3?: number | null
           year: number
         }
         Update: {
           all_cats?: string | null
-          cat_1?: string | null
-          cat_10?: string | null
-          cat_11?: string | null
-          cat_12?: string | null
-          cat_13?: string | null
-          cat_14?: string | null
-          cat_15?: string | null
-          cat_2?: string | null
-          cat_3?: string | null
-          cat_4?: string | null
-          cat_5?: string | null
-          cat_6?: string | null
-          cat_7?: string | null
-          cat_8?: string | null
-          cat_9?: string | null
-          comment?: string | null
+          cat_1?: number | null
+          cat_10?: number | null
+          cat_11?: number | null
+          cat_12?: number | null
+          cat_13?: number | null
+          cat_14?: number | null
+          cat_15?: number | null
+          cat_2?: number | null
+          cat_3?: number | null
+          cat_4?: number | null
+          cat_5?: number | null
+          cat_6?: number | null
+          cat_7?: number | null
+          cat_8?: number | null
+          cat_9?: number | null
           company_name?: string
           cradle_to_gate?: number | null
+          created_at?: string | null
           currency?: string | null
           emission_intensity?: number | null
           emission_page?: string | null
           fiscal_year?: string | null
           ghg_standard?: string | null
-          hq_country_move?: string | null
-          industry?: string | null
-          isic_rev_4?: string | null
           page_revenue?: string | null
           publication_date?: string | null
           revenue?: number | null
           revenue_million?: number | null
           scope_1?: number | null
-          scope_1_share_of_total_upstream_emissions?: string | null
-          scope_2_location_based?: string | null
-          scope_2_market_based?: string | null
-          scope_2_unknown?: string | null
-          share_upstream_of_scope_3?: string | null
-          source?: string | null
-          source_emisions_page_move?: string | null
+          scope_1_share_of_total_upstream_emissions?: number | null
+          scope_2_location_based?: number | null
+          scope_2_market_based?: number | null
+          scope_2_unknown?: number | null
+          share_upstream_of_scope_3?: number | null
           source_emission_link?: string | null
           source_emission_report?: string | null
+          source_emissions_page_move?: string | null
           source_revenue?: string | null
           source_revenue_link?: string | null
           status?: string | null
-          total_emission_location_based?: string | null
-          total_emission_market_based?: string | null
+          total_emission_location_based?: number | null
+          total_emission_market_based?: number | null
           total_reported_emission_scope_1_2?: number | null
           total_reported_emission_scope_1_2_3?: number | null
-          total_scope_3?: string | null
+          total_scope_3?: number | null
           total_upstream_emissions?: number | null
-          upstream_scope_3?: string | null
+          updated_at?: string | null
+          upstream_scope_3?: number | null
           year?: number
         }
         Relationships: [
@@ -315,80 +257,64 @@ export type Database = {
             referencedRelation: "company"
             referencedColumns: ["name"]
           },
-          {
-            foreignKeyName: "emission_company_name_fkey"
-            columns: ["company_name"]
-            isOneToOne: false
-            referencedRelation: "company_slug"
-            referencedColumns: ["company_name"]
-          },
         ]
       }
       target: {
         Row: {
           action: string | null
           base_year: number | null
-          commitment_deadline: string | null
-          commitment_type: string | null
           company_name: string
           company_temperature_alignment: string | null
+          created_at: string | null
           date_published: string | null
           full_target_language: string | null
-          lei: string | null
-          reason_for_commitment_extension_or_removal: string | null
           scope: string
-          status: string | null
-          "sub-type": string | null
+          sub_type: string | null
           target: string | null
           target_classification: string | null
-          target_value: string | null
+          target_value: number | null
           target_wording: string | null
           target_year: number
           type: string
+          updated_at: string | null
           year_type: string | null
         }
         Insert: {
           action?: string | null
           base_year?: number | null
-          commitment_deadline?: string | null
-          commitment_type?: string | null
           company_name: string
           company_temperature_alignment?: string | null
+          created_at?: string | null
           date_published?: string | null
           full_target_language?: string | null
-          lei?: string | null
-          reason_for_commitment_extension_or_removal?: string | null
           scope: string
-          status?: string | null
-          "sub-type"?: string | null
+          sub_type?: string | null
           target?: string | null
           target_classification?: string | null
-          target_value?: string | null
+          target_value?: number | null
           target_wording?: string | null
           target_year: number
           type: string
+          updated_at?: string | null
           year_type?: string | null
         }
         Update: {
           action?: string | null
           base_year?: number | null
-          commitment_deadline?: string | null
-          commitment_type?: string | null
           company_name?: string
           company_temperature_alignment?: string | null
+          created_at?: string | null
           date_published?: string | null
           full_target_language?: string | null
-          lei?: string | null
-          reason_for_commitment_extension_or_removal?: string | null
           scope?: string
-          status?: string | null
-          "sub-type"?: string | null
+          sub_type?: string | null
           target?: string | null
           target_classification?: string | null
-          target_value?: string | null
+          target_value?: number | null
           target_wording?: string | null
           target_year?: number
           type?: string
+          updated_at?: string | null
           year_type?: string | null
         }
         Relationships: [
@@ -399,13 +325,6 @@ export type Database = {
             referencedRelation: "company"
             referencedColumns: ["name"]
           },
-          {
-            foreignKeyName: "target_company_name_fkey"
-            columns: ["company_name"]
-            isOneToOne: false
-            referencedRelation: "company_slug"
-            referencedColumns: ["company_name"]
-          },
         ]
       }
       temp_company: {
@@ -415,7 +334,7 @@ export type Database = {
           hq_country: string | null
           industry: string | null
           isic: string | null
-          name: string | null
+          name: string
           net_zero_year: string | null
           sbt_near_term_target: string | null
           sbt_near_term_year: string | null
@@ -431,7 +350,7 @@ export type Database = {
           hq_country?: string | null
           industry?: string | null
           isic?: string | null
-          name?: string | null
+          name: string
           net_zero_year?: string | null
           sbt_near_term_target?: string | null
           sbt_near_term_year?: string | null
@@ -447,7 +366,7 @@ export type Database = {
           hq_country?: string | null
           industry?: string | null
           isic?: string | null
-          name?: string | null
+          name?: string
           net_zero_year?: string | null
           sbt_near_term_target?: string | null
           sbt_near_term_year?: string | null
@@ -459,9 +378,7 @@ export type Database = {
         }
         Relationships: []
       }
-    }
-    Views: {
-      companies_by_intensity: {
+      temp_emission: {
         Row: {
           all_cats: string | null
           cat_1: string | null
@@ -479,9 +396,9 @@ export type Database = {
           cat_7: string | null
           cat_8: string | null
           cat_9: string | null
-          comment: string | null
-          company_name: string | null
+          company_name: string
           cradle_to_gate: number | null
+          created_at: string | null
           currency: string | null
           emission_intensity: number | null
           emission_page: string | null
@@ -500,7 +417,6 @@ export type Database = {
           scope_2_market_based: string | null
           scope_2_unknown: string | null
           share_upstream_of_scope_3: string | null
-          source: string | null
           source_emisions_page_move: string | null
           source_emission_link: string | null
           source_emission_report: string | null
@@ -513,8 +429,9 @@ export type Database = {
           total_reported_emission_scope_1_2_3: number | null
           total_scope_3: string | null
           total_upstream_emissions: number | null
+          updated_at: string | null
           upstream_scope_3: string | null
-          year: number | null
+          year: number
         }
         Insert: {
           all_cats?: string | null
@@ -533,9 +450,9 @@ export type Database = {
           cat_7?: string | null
           cat_8?: string | null
           cat_9?: string | null
-          comment?: string | null
-          company_name?: string | null
+          company_name: string
           cradle_to_gate?: number | null
+          created_at?: string | null
           currency?: string | null
           emission_intensity?: number | null
           emission_page?: string | null
@@ -554,7 +471,6 @@ export type Database = {
           scope_2_market_based?: string | null
           scope_2_unknown?: string | null
           share_upstream_of_scope_3?: string | null
-          source?: string | null
           source_emisions_page_move?: string | null
           source_emission_link?: string | null
           source_emission_report?: string | null
@@ -567,8 +483,9 @@ export type Database = {
           total_reported_emission_scope_1_2_3?: number | null
           total_scope_3?: string | null
           total_upstream_emissions?: number | null
+          updated_at?: string | null
           upstream_scope_3?: string | null
-          year?: number | null
+          year: number
         }
         Update: {
           all_cats?: string | null
@@ -587,9 +504,9 @@ export type Database = {
           cat_7?: string | null
           cat_8?: string | null
           cat_9?: string | null
-          comment?: string | null
-          company_name?: string | null
+          company_name?: string
           cradle_to_gate?: number | null
+          created_at?: string | null
           currency?: string | null
           emission_intensity?: number | null
           emission_page?: string | null
@@ -608,7 +525,6 @@ export type Database = {
           scope_2_market_based?: string | null
           scope_2_unknown?: string | null
           share_upstream_of_scope_3?: string | null
-          source?: string | null
           source_emisions_page_move?: string | null
           source_emission_link?: string | null
           source_emission_report?: string | null
@@ -621,68 +537,22 @@ export type Database = {
           total_reported_emission_scope_1_2_3?: number | null
           total_scope_3?: string | null
           total_upstream_emissions?: number | null
+          updated_at?: string | null
           upstream_scope_3?: string | null
-          year?: number | null
+          year?: number
         }
         Relationships: [
           {
-            foreignKeyName: "emission_company_name_fkey"
+            foreignKeyName: "temp_emission_company_name_fkey"
             columns: ["company_name"]
             isOneToOne: false
             referencedRelation: "company"
             referencedColumns: ["name"]
           },
-          {
-            foreignKeyName: "emission_company_name_fkey"
-            columns: ["company_name"]
-            isOneToOne: false
-            referencedRelation: "company_slug"
-            referencedColumns: ["company_name"]
-          },
         ]
       }
-      company_slug: {
-        Row: {
-          company_name: string | null
-          company_url: string | null
-          industry: string | null
-          isic: string | null
-          lei: string | null
-          net_zero_year: string | null
-          sbt_near_term_target: string | null
-          sbt_near_term_year: string | null
-          sbt_status: string | null
-          slug: string | null
-          source_reports_page: string | null
-        }
-        Insert: {
-          company_name?: string | null
-          company_url?: string | null
-          industry?: string | null
-          isic?: string | null
-          lei?: string | null
-          net_zero_year?: string | null
-          sbt_near_term_target?: string | null
-          sbt_near_term_year?: string | null
-          sbt_status?: string | null
-          slug?: never
-          source_reports_page?: string | null
-        }
-        Update: {
-          company_name?: string | null
-          company_url?: string | null
-          industry?: string | null
-          isic?: string | null
-          lei?: string | null
-          net_zero_year?: string | null
-          sbt_near_term_target?: string | null
-          sbt_near_term_year?: string | null
-          sbt_status?: string | null
-          slug?: never
-          source_reports_page?: string | null
-        }
-        Relationships: []
-      }
+    }
+    Views: {
       industry: {
         Row: {
           company_count: number | null
@@ -713,7 +583,7 @@ export type Database = {
           commitment_deadline: string
           total_reported_emission_scope_1_2_3: number
           revenue: number
-          hq_country_move: string
+          hq_country: string
           year: number
           currency: string
           emission_intensity: number
@@ -776,81 +646,81 @@ type PublicSchema = Database[Extract<keyof Database, "public">]
 
 export type Tables<
   PublicTableNameOrOptions extends
-  | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
-  | { schema: keyof Database },
+    | keyof (PublicSchema["Tables"] & PublicSchema["Views"])
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-    Database[PublicTableNameOrOptions["schema"]]["Views"])
-  : never = never,
+    ? keyof (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
+        Database[PublicTableNameOrOptions["schema"]]["Views"])
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
-    Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
+      Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
       Row: infer R
     }
-  ? R
-  : never
+    ? R
+    : never
   : PublicTableNameOrOptions extends keyof (PublicSchema["Tables"] &
-    PublicSchema["Views"])
-  ? (PublicSchema["Tables"] &
-    PublicSchema["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
-    }
-  ? R
-  : never
-  : never
+        PublicSchema["Views"])
+    ? (PublicSchema["Tables"] &
+        PublicSchema["Views"])[PublicTableNameOrOptions] extends {
+        Row: infer R
+      }
+      ? R
+      : never
+    : never
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
-  | keyof PublicSchema["Tables"]
-  | { schema: keyof Database },
+    | keyof PublicSchema["Tables"]
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-  : never = never,
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-    Insert: infer I
-  }
-  ? I
-  : never
+      Insert: infer I
+    }
+    ? I
+    : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
-  ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-    Insert: infer I
-  }
-  ? I
-  : never
-  : never
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Insert: infer I
+      }
+      ? I
+      : never
+    : never
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
-  | keyof PublicSchema["Tables"]
-  | { schema: keyof Database },
+    | keyof PublicSchema["Tables"]
+    | { schema: keyof Database },
   TableName extends PublicTableNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
-  : never = never,
+    ? keyof Database[PublicTableNameOrOptions["schema"]]["Tables"]
+    : never = never,
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-    Update: infer U
-  }
-  ? U
-  : never
+      Update: infer U
+    }
+    ? U
+    : never
   : PublicTableNameOrOptions extends keyof PublicSchema["Tables"]
-  ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
-    Update: infer U
-  }
-  ? U
-  : never
-  : never
+    ? PublicSchema["Tables"][PublicTableNameOrOptions] extends {
+        Update: infer U
+      }
+      ? U
+      : never
+    : never
 
 export type Enums<
   PublicEnumNameOrOptions extends
-  | keyof PublicSchema["Enums"]
-  | { schema: keyof Database },
+    | keyof PublicSchema["Enums"]
+    | { schema: keyof Database },
   EnumName extends PublicEnumNameOrOptions extends { schema: keyof Database }
-  ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
-  : never = never,
+    ? keyof Database[PublicEnumNameOrOptions["schema"]]["Enums"]
+    : never = never,
 > = PublicEnumNameOrOptions extends { schema: keyof Database }
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
-  ? PublicSchema["Enums"][PublicEnumNameOrOptions]
-  : never
+    ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
 
