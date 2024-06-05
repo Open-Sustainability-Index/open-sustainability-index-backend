@@ -13,8 +13,13 @@ export async function loader ({ request, params }: LoaderFunctionArgs) {
     commitment:commitment(*)
   `).eq('slug', params.company).single()
 
+  const dataWithName = {
+    company_name: data?.name,
+    ...data
+  }
+
   return {
-    data,
+    data: dataWithName,
     error,
   }
 
