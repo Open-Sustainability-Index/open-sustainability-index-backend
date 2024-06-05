@@ -57,6 +57,6 @@ INSERT INTO public.emission VALUES (2023, '2023', 'AB SKF', 49716, 204024, 44732
 --
 -- Data for Name: commitment; Type: TABLE DATA; Schema: public; Owner: -
 --
-INSERT INTO public.commitment VALUES ('A.P. Moller - Maersk A/S', 'Target', NULL, NULL, NULL, NULL, 'CY', '2024-02-08', '2024-06-03 11:55:36.578984+00', '2024-06-03 11:55:36.578984+00');
-INSERT INTO public.commitment VALUES ('AB SKF', 'Target', NULL, NULL, NULL, NULL, 'CY', '2023-03-09', '2024-06-03 11:55:36.653458+00', '2024-06-03 11:55:36.653458+00');
-INSERT INTO public.commitment VALUES ('Maersk Contract Logistics Management (Asia) Limited', 'Target', NULL, NULL, NULL, NULL, 'CY', '2024-03-21', '2024-06-03 11:55:44.36375+00', '2024-06-03 11:55:44.36375+00');
+INSERT INTO public.commitment VALUES ('A.P. Moller - Maersk A/S', 'Target', 'Standard', NULL, NULL, NULL, 'CY', '2024-02-08', '2024-06-03 11:55:36.578984+00', '2024-06-03 11:55:36.578984+00');
+INSERT INTO public.commitment VALUES ('AB SKF', 'Target', 'Standard', NULL, NULL, NULL, 'CY', '2023-03-09', '2024-06-03 11:55:36.653458+00', '2024-06-03 11:55:36.653458+00');
+INSERT INTO public.commitment VALUES ('Maersk Contract Logistics Management (Asia) Limited', 'Target', 'Standard', NULL, NULL, NULL, 'CY', '2024-03-21', '2024-06-03 11:55:44.36375+00', '2024-06-03 11:55:44.36375+00');
