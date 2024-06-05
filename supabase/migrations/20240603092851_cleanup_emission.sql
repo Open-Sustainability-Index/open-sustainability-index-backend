@@ -10,8 +10,6 @@ alter table "public"."emission" drop column "source_emisions_page_move";
 
 alter table "public"."emission" add column "source_emissions_page_move" text;
 
-alter table "public"."emission" alter column "all_cats" set data type numeric using "all_cats"::numeric;
-
 alter table "public"."emission" alter column "cat_1" set data type numeric using "cat_1"::numeric;
 
 alter table "public"."emission" alter column "cat_10" set data type numeric using "cat_10"::numeric;
