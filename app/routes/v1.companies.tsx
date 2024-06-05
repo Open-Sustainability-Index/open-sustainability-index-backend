@@ -87,10 +87,10 @@ import { authenticate } from '../lib/authenticate';
  *                         type: string
  *                         description: The deadline of the commitment
  *                       total_reported_emission_scope_1_2_3:
- *                         type: integer
+ *                         type: number
  *                         description: Total reported emissions for scope 1, 2, and 3
  *                       revenue:
- *                         type: integer
+ *                         type: number
  *                         description: The revenue of the company
  *                       hq_country_move:
  *                         type: string
@@ -103,7 +103,7 @@ import { authenticate } from '../lib/authenticate';
  *                         description: The currency used
  *                       emission_intensity:
  *                         type: number
- *                         description: The emission intensity
+ *                         description: The emission intensity (t CO₂e / M USD)
  *                       targets:
  *                         type: array
  *                         description: List of targets set by the company
