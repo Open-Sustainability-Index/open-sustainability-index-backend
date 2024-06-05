@@ -176,7 +176,7 @@ export async function loader ({ params, request }: LoaderFunctionArgs) {
   authenticate({ request })
   const { supabaseClient } = createSupabaseServerClient(request)
 
-  const { data, error } = await supabaseClient.from('company_slug').select(`
+  const { data, error } = await supabaseClient.from('company').select(`
     *,
     emissions:emission(*),
     targets:target(*),
