@@ -88,8 +88,8 @@ Note: use `&api-key=demo`, or set it as a Bearer token in the header.
 
 - Companies:
 	- List: http://localhost:5173/v1/companies?sort=company_name&order=asc&limit=20&offset=0&api-key=demo
-	- Company: http://localhost:5173/v1/companies/3m?api-key=demo
-	- Company all years: http://localhost:5173/v1/companies/3m/all-years?api-key=demo
+	- Company: http://localhost:5173/v1/companies/ap-moller-maersk?api-key=demo
+	- Company all years: http://localhost:5173/v1/companies/ap-moller-maersk/all-years?api-key=demo
 - Industries: http://localhost:5173/v1/industries?api-key=demo
 - Search: http://localhost:5173/v1/search?query=&sort=name&order=asc&api-key=demo
 
