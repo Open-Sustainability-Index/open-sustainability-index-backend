@@ -13,8 +13,8 @@ export type Database = {
         Row: {
           action: string | null
           commitment_deadline: string | null
-          commitment_type: string | null
-          company_name: string
+          commitment_type: string
+          company_slug: string
           created_at: string | null
           date_published: string | null
           reason_for_commitment_extension_or_removal: string | null
@@ -25,8 +25,8 @@ export type Database = {
         Insert: {
           action?: string | null
           commitment_deadline?: string | null
-          commitment_type?: string | null
-          company_name: string
+          commitment_type: string
+          company_slug: string
           created_at?: string | null
           date_published?: string | null
           reason_for_commitment_extension_or_removal?: string | null
@@ -37,8 +37,8 @@ export type Database = {
         Update: {
           action?: string | null
           commitment_deadline?: string | null
-          commitment_type?: string | null
-          company_name?: string
+          commitment_type?: string
+          company_slug?: string
           created_at?: string | null
           date_published?: string | null
           reason_for_commitment_extension_or_removal?: string | null
@@ -48,11 +48,18 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "commitment_company_name_fkey"
-            columns: ["company_name"]
-            isOneToOne: true
+            foreignKeyName: "public_commitment_company_slug_fkey"
+            columns: ["company_slug"]
+            isOneToOne: false
             referencedRelation: "company"
-            referencedColumns: ["name"]
+            referencedColumns: ["slug"]
+          },
+          {
+            foreignKeyName: "public_commitment_company_slug_fkey"
+            columns: ["company_slug"]
+            isOneToOne: false
+            referencedRelation: "view_company_slug"
+            referencedColumns: ["slug"]
           },
         ]
       }
@@ -113,7 +120,7 @@ export type Database = {
           cat_7: number | null
           cat_8: number | null
           cat_9: number | null
-          company_name: string
+          company_slug: string
           cradle_to_gate: number | null
           created_at: string | null
           currency: string | null
@@ -164,7 +171,7 @@ export type Database = {
           cat_7?: number | null
           cat_8?: number | null
           cat_9?: number | null
-          company_name: string
+          company_slug: string
           cradle_to_gate?: number | null
           created_at?: string | null
           currency?: string | null
@@ -215,7 +222,7 @@ export type Database = {
           cat_7?: number | null
           cat_8?: number | null
           cat_9?: number | null
-          company_name?: string
+          company_slug?: string
           cradle_to_gate?: number | null
           created_at?: string | null
           currency?: string | null
@@ -251,11 +258,18 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "emission_company_name_fkey"
-            columns: ["company_name"]
+            foreignKeyName: "public_emission_slug_fkey"
+            columns: ["company_slug"]
             isOneToOne: false
             referencedRelation: "company"
-            referencedColumns: ["name"]
+            referencedColumns: ["slug"]
+          },
+          {
+            foreignKeyName: "public_emission_slug_fkey"
+            columns: ["company_slug"]
+            isOneToOne: false
+            referencedRelation: "view_company_slug"
+            referencedColumns: ["slug"]
           },
         ]
       }
@@ -263,7 +277,7 @@ export type Database = {
         Row: {
           action: string | null
           base_year: number | null
-          company_name: string
+          company_slug: string
           company_temperature_alignment: string | null
           created_at: string | null
           date_published: string | null
@@ -273,7 +287,7 @@ export type Database = {
           target: string | null
           target_classification: string | null
           target_value: number | null
-          target_wording: string | null
+          target_wording: string
           target_year: number
           type: string
           updated_at: string | null
@@ -282,7 +296,7 @@ export type Database = {
         Insert: {
           action?: string | null
           base_year?: number | null
-          company_name: string
+          company_slug: string
           company_temperature_alignment?: string | null
           created_at?: string | null
           date_published?: string | null
@@ -292,7 +306,7 @@ export type Database = {
           target?: string | null
           target_classification?: string | null
           target_value?: number | null
-          target_wording?: string | null
+          target_wording: string
           target_year: number
           type: string
           updated_at?: string | null
@@ -301,7 +315,7 @@ export type Database = {
         Update: {
           action?: string | null
           base_year?: number | null
-          company_name?: string
+          company_slug?: string
           company_temperature_alignment?: string | null
           created_at?: string | null
           date_published?: string | null
@@ -311,7 +325,7 @@ export type Database = {
           target?: string | null
           target_classification?: string | null
           target_value?: number | null
-          target_wording?: string | null
+          target_wording?: string
           target_year?: number
           type?: string
           updated_at?: string | null
@@ -319,235 +333,18 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "target_company_name_fkey"
-            columns: ["company_name"]
+            foreignKeyName: "public_target_company_slug_fkey"
+            columns: ["company_slug"]
             isOneToOne: false
             referencedRelation: "company"
-            referencedColumns: ["name"]
+            referencedColumns: ["slug"]
           },
-        ]
-      }
-      temp_company: {
-        Row: {
-          autogenerated_contact: string | null
-          company_url: string | null
-          hq_country: string | null
-          industry: string | null
-          isic: string | null
-          name: string
-          net_zero_year: string | null
-          sbt_near_term_target: string | null
-          sbt_near_term_year: string | null
-          sbt_status: string | null
-          source_reports_page: string | null
-          sustainability_contact_email: string | null
-          sustainability_contact_linkedin: string | null
-          sustainability_contact_name: string | null
-        }
-        Insert: {
-          autogenerated_contact?: string | null
-          company_url?: string | null
-          hq_country?: string | null
-          industry?: string | null
-          isic?: string | null
-          name: string
-          net_zero_year?: string | null
-          sbt_near_term_target?: string | null
-          sbt_near_term_year?: string | null
-          sbt_status?: string | null
-          source_reports_page?: string | null
-          sustainability_contact_email?: string | null
-          sustainability_contact_linkedin?: string | null
-          sustainability_contact_name?: string | null
-        }
-        Update: {
-          autogenerated_contact?: string | null
-          company_url?: string | null
-          hq_country?: string | null
-          industry?: string | null
-          isic?: string | null
-          name?: string
-          net_zero_year?: string | null
-          sbt_near_term_target?: string | null
-          sbt_near_term_year?: string | null
-          sbt_status?: string | null
-          source_reports_page?: string | null
-          sustainability_contact_email?: string | null
-          sustainability_contact_linkedin?: string | null
-          sustainability_contact_name?: string | null
-        }
-        Relationships: []
-      }
-      temp_emission: {
-        Row: {
-          all_cats: string | null
-          cat_1: string | null
-          cat_10: string | null
-          cat_11: string | null
-          cat_12: string | null
-          cat_13: string | null
-          cat_14: string | null
-          cat_15: string | null
-          cat_2: string | null
-          cat_3: string | null
-          cat_4: string | null
-          cat_5: string | null
-          cat_6: string | null
-          cat_7: string | null
-          cat_8: string | null
-          cat_9: string | null
-          company_name: string
-          cradle_to_gate: number | null
-          created_at: string | null
-          currency: string | null
-          emission_intensity: number | null
-          emission_page: string | null
-          fiscal_year: string | null
-          ghg_standard: string | null
-          hq_country_move: string | null
-          industry: string | null
-          isic_rev_4: string | null
-          page_revenue: string | null
-          publication_date: string | null
-          revenue: number | null
-          revenue_million: number | null
-          scope_1: number | null
-          scope_1_share_of_total_upstream_emissions: string | null
-          scope_2_location_based: string | null
-          scope_2_market_based: string | null
-          scope_2_unknown: string | null
-          share_upstream_of_scope_3: string | null
-          source_emisions_page_move: string | null
-          source_emission_link: string | null
-          source_emission_report: string | null
-          source_revenue: string | null
-          source_revenue_link: string | null
-          status: string | null
-          total_emission_location_based: string | null
-          total_emission_market_based: string | null
-          total_reported_emission_scope_1_2: number | null
-          total_reported_emission_scope_1_2_3: number | null
-          total_scope_3: string | null
-          total_upstream_emissions: number | null
-          updated_at: string | null
-          upstream_scope_3: string | null
-          year: number
-        }
-        Insert: {
-          all_cats?: string | null
-          cat_1?: string | null
-          cat_10?: string | null
-          cat_11?: string | null
-          cat_12?: string | null
-          cat_13?: string | null
-          cat_14?: string | null
-          cat_15?: string | null
-          cat_2?: string | null
-          cat_3?: string | null
-          cat_4?: string | null
-          cat_5?: string | null
-          cat_6?: string | null
-          cat_7?: string | null
-          cat_8?: string | null
-          cat_9?: string | null
-          company_name: string
-          cradle_to_gate?: number | null
-          created_at?: string | null
-          currency?: string | null
-          emission_intensity?: number | null
-          emission_page?: string | null
-          fiscal_year?: string | null
-          ghg_standard?: string | null
-          hq_country_move?: string | null
-          industry?: string | null
-          isic_rev_4?: string | null
-          page_revenue?: string | null
-          publication_date?: string | null
-          revenue?: number | null
-          revenue_million?: number | null
-          scope_1?: number | null
-          scope_1_share_of_total_upstream_emissions?: string | null
-          scope_2_location_based?: string | null
-          scope_2_market_based?: string | null
-          scope_2_unknown?: string | null
-          share_upstream_of_scope_3?: string | null
-          source_emisions_page_move?: string | null
-          source_emission_link?: string | null
-          source_emission_report?: string | null
-          source_revenue?: string | null
-          source_revenue_link?: string | null
-          status?: string | null
-          total_emission_location_based?: string | null
-          total_emission_market_based?: string | null
-          total_reported_emission_scope_1_2?: number | null
-          total_reported_emission_scope_1_2_3?: number | null
-          total_scope_3?: string | null
-          total_upstream_emissions?: number | null
-          updated_at?: string | null
-          upstream_scope_3?: string | null
-          year: number
-        }
-        Update: {
-          all_cats?: string | null
-          cat_1?: string | null
-          cat_10?: string | null
-          cat_11?: string | null
-          cat_12?: string | null
-          cat_13?: string | null
-          cat_14?: string | null
-          cat_15?: string | null
-          cat_2?: string | null
-          cat_3?: string | null
-          cat_4?: string | null
-          cat_5?: string | null
-          cat_6?: string | null
-          cat_7?: string | null
-          cat_8?: string | null
-          cat_9?: string | null
-          company_name?: string
-          cradle_to_gate?: number | null
-          created_at?: string | null
-          currency?: string | null
-          emission_intensity?: number | null
-          emission_page?: string | null
-          fiscal_year?: string | null
-          ghg_standard?: string | null
-          hq_country_move?: string | null
-          industry?: string | null
-          isic_rev_4?: string | null
-          page_revenue?: string | null
-          publication_date?: string | null
-          revenue?: number | null
-          revenue_million?: number | null
-          scope_1?: number | null
-          scope_1_share_of_total_upstream_emissions?: string | null
-          scope_2_location_based?: string | null
-          scope_2_market_based?: string | null
-          scope_2_unknown?: string | null
-          share_upstream_of_scope_3?: string | null
-          source_emisions_page_move?: string | null
-          source_emission_link?: string | null
-          source_emission_report?: string | null
-          source_revenue?: string | null
-          source_revenue_link?: string | null
-          status?: string | null
-          total_emission_location_based?: string | null
-          total_emission_market_based?: string | null
-          total_reported_emission_scope_1_2?: number | null
-          total_reported_emission_scope_1_2_3?: number | null
-          total_scope_3?: string | null
-          total_upstream_emissions?: number | null
-          updated_at?: string | null
-          upstream_scope_3?: string | null
-          year?: number
-        }
-        Relationships: [
           {
-            foreignKeyName: "temp_emission_company_name_fkey"
-            columns: ["company_name"]
+            foreignKeyName: "public_target_company_slug_fkey"
+            columns: ["company_slug"]
             isOneToOne: false
-            referencedRelation: "company"
-            referencedColumns: ["name"]
+            referencedRelation: "view_company_slug"
+            referencedColumns: ["slug"]
           },
         ]
       }
@@ -558,6 +355,39 @@ export type Database = {
           company_count: number | null
           name: string | null
           slug: string | null
+        }
+        Relationships: []
+      }
+      view_company_slug: {
+        Row: {
+          company_name: string | null
+          company_url: string | null
+          industry: string | null
+          isic: string | null
+          lei: string | null
+          name: string | null
+          slug: string | null
+          slug_old: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          company_url?: string | null
+          industry?: string | null
+          isic?: string | null
+          lei?: string | null
+          name?: string | null
+          slug?: string | null
+          slug_old?: never
+        }
+        Update: {
+          company_name?: string | null
+          company_url?: string | null
+          industry?: string | null
+          isic?: string | null
+          lei?: string | null
+          name?: string | null
+          slug?: string | null
+          slug_old?: never
         }
         Relationships: []
       }
@@ -577,6 +407,8 @@ export type Database = {
         }
         Returns: {
           company_name: string
+          slug: string
+          company_url: string
           industry: string
           commitment_type: string
           status: string
@@ -605,9 +437,10 @@ export type Database = {
         }
         Returns: {
           company_name: string
+          slug: string
+          company_url: string
           industry: string
           lei: string
-          company_url: string
           updated_at: string
           id: string
           commitments: Json[]
