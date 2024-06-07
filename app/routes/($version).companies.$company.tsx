@@ -176,15 +176,36 @@ export async function loader ({ params, request }: LoaderFunctionArgs) {
   authenticate({ request })
   const { supabaseClient } = createSupabaseServerClient(request)
 
-  const { data, error } = await supabaseClient.from('company_slug').select(`
-    *,
-    emissions:emission(*),
-    targets:target(*),
-    commitment:commitment(*)
-  `).eq('slug', params.company).single()
+  let dataWithName = {}
+  let error = null
+
+  const fields = `
+  *,
+  emissions:emission(*),
+  targets:target(*),
+  commitment:commitment(*)
+`
+  const { data: dataNewSlug, error: errorNewSlug } = await supabaseClient.from('view_company_slug')
+    .select(fields).eq('slug', params.company).single()
+  dataWithName = {
+    company_name: dataNewSlug?.name,
+    ...dataNewSlug
+  }
+  error = errorNewSlug
+  
+  if (errorNewSlug?.code === 'PGRST116') {
+    const { data: dataOldSlug, error: errorOldSlug } = await supabaseClient.from('view_company_slug')
+      .select(fields).eq('slug_old', params.company).single()
+    dataWithName = {
+      slug_new: dataOldSlug?.slug,
+      company_name: dataOldSlug?.name,
+      ...dataOldSlug
+    }
+    error = errorOldSlug
+  }
 
   return {
-    data,
+    data: dataWithName,
     error,
   }
 }
