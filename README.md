@@ -98,29 +98,32 @@ Live API on https://api.opensustainabilityindex.org/
 ## SQL functions
 
 	SELECT * FROM companies(
-		0,                     -- offset_value
-		20,                     -- limit_value
-		'name',                 -- sort_by
-		'asc'                  -- sort_order
-	--  'Technology',           -- industry_filter
-	--  true,                   -- near_term_filter
-	--  'Type A',               -- commitment_type_filter
-	--  'Active',               -- commitment_status_filter
-	--  'Target 1'              -- target_target_filter
+		0,                  -- offset_value
+		400,                -- limit_value
+		'name',             -- sort_by
+		'asc',              -- sort_order
+		--  'Technology',   -- industry_filter
+		--  true,           -- near_term_filter
+		--  'Type A',       -- commitment_type_filter
+		--  'Active',       -- commitment_status_filter
+		--  'Target 1'      -- target_target_filter
+		--  'omx120'        -- tags_filter
 	);
 
 -- v2:
 
 	SELECT * FROM companies_v2(
-		0,                     -- offset_value
-		20,	                     -- limit_value
-		'name',                 -- sort_by
-		'asc'                  -- sort_order
-	--  'Technology',           -- industry_filter
-	--  true,                   -- near_term_filter
-	--  'Type A',               -- commitment_type_filter
-	--  'Active',               -- commitment_status_filter
-	--  'Target 1'              -- target_target_filter
+		0,                  -- offset_value
+		20,	                -- limit_value
+		'name',             -- sort_by
+		'asc'               -- sort_order
+		--  'Technology',   -- industry_filter
+		--  true,           -- near_term_filter
+		--  'Type A',       -- commitment_type_filter
+		--  'Active',       -- commitment_status_filter
+		--  'Target 1'      -- target_target_filter
+		--  ??              -- emissions_required
+		--  'omx120'        -- tags_filter
 	);
 
 Get SQL code:
