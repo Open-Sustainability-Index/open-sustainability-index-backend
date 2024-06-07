@@ -98,7 +98,7 @@ Live API on https://api.opensustainabilityindex.org/
 ## SQL functions
 
 	SELECT * FROM companies(
-		10,                     -- offset_value
+		0,                     -- offset_value
 		20,                     -- limit_value
 		'name',                 -- sort_by
 		'asc'                  -- sort_order
@@ -112,7 +112,7 @@ Live API on https://api.opensustainabilityindex.org/
 -- v2:
 
 	SELECT * FROM companies_v2(
-		10,                     -- offset_value
+		0,                     -- offset_value
 		20,	                     -- limit_value
 		'name',                 -- sort_by
 		'asc'                  -- sort_order
