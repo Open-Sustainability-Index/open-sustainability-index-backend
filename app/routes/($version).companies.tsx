@@ -6,21 +6,22 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
   const url = authenticate({ request });
 
   const limitQueryString = url.searchParams.get('limit')
-  const offsetQueryString = url.searchParams.get('offset')
-  const sortByQueryString = url.searchParams.get('sort')
-  const sortOrderQueryString = url.searchParams.get('order')
-  const filterIndustry = url.searchParams.get('industry')
-  const filterNearTerm = url.searchParams.get('near-term')
-  const filterNetZero = url.searchParams.get('net-zero')
-  const required = url.searchParams.get('required')
-
   const limit_value = limitQueryString ? parseInt(limitQueryString) : 99
+  const offsetQueryString = url.searchParams.get('offset')
   const offset_value = offsetQueryString ? parseInt(offsetQueryString) : 0
-  const sort_by = sortByQueryString ?? 'lower(name)'
-  const sort_order = sortOrderQueryString ?? 'asc'
-  const industry_filter = filterIndustry
+
+  const sort_by = url.searchParams.get('sort') ?? 'lower(name)'
+  const sort_order = url.searchParams.get('order') ?? 'asc'
+
+  const industry_filter = url.searchParams.get('industry') ?? undefined
+
+  const filterNetZero = url.searchParams.get('net-zero')
+  const filterNearTerm = url.searchParams.get('near-term')
   const near_term_filter = filterNearTerm?.toLowerCase() === 'commited'
-  const emissions_required = required?.includes('emissions') ? 'required' : undefined
+
+  const emissions_required = url.searchParams.get('required')?.includes('emissions') ? 'required' : undefined
+
+  const tags = url.searchParams.get('tags') ?? undefined
 
   let commitment_type_filter,
     commitment_status_filter,
@@ -50,6 +51,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
       commitment_status_filter,
       target_target_filter,
       emissions_required,
+      tags,
     })
 
   return {
