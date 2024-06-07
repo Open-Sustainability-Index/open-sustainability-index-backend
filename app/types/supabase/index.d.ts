@@ -73,7 +73,9 @@ export type Database = {
           isic: string | null
           lei: string | null
           name: string
+          organization_type: string | null
           slug: string | null
+          tags: string | null
           updated_at: string
         }
         Insert: {
@@ -85,7 +87,9 @@ export type Database = {
           isic?: string | null
           lei?: string | null
           name: string
+          organization_type?: string | null
           slug?: string | null
+          tags?: string | null
           updated_at?: string
         }
         Update: {
@@ -97,7 +101,9 @@ export type Database = {
           isic?: string | null
           lei?: string | null
           name?: string
+          organization_type?: string | null
           slug?: string | null
+          tags?: string | null
           updated_at?: string
         }
         Relationships: []
@@ -348,6 +354,51 @@ export type Database = {
           },
         ]
       }
+      temp_company: {
+        Row: {
+          company_url: string | null
+          created_at: string
+          hq_country: string | null
+          id: string
+          industry: string | null
+          isic: string | null
+          lei: string | null
+          name: string
+          organization_type: string | null
+          slug: string | null
+          tags: string | null
+          updated_at: string
+        }
+        Insert: {
+          company_url?: string | null
+          created_at?: string
+          hq_country?: string | null
+          id?: string
+          industry?: string | null
+          isic?: string | null
+          lei?: string | null
+          name: string
+          organization_type?: string | null
+          slug?: string | null
+          tags?: string | null
+          updated_at?: string
+        }
+        Update: {
+          company_url?: string | null
+          created_at?: string
+          hq_country?: string | null
+          id?: string
+          industry?: string | null
+          isic?: string | null
+          lei?: string | null
+          name?: string
+          organization_type?: string | null
+          slug?: string | null
+          tags?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       industry: {
@@ -404,12 +455,15 @@ export type Database = {
           commitment_type_filter?: string
           commitment_status_filter?: string
           target_target_filter?: string
+          tags_filter?: string
         }
         Returns: {
           company_name: string
           slug: string
           company_url: string
           industry: string
+          organization_type: string
+          tags: string
           commitment_type: string
           status: string
           commitment_deadline: string
@@ -434,12 +488,15 @@ export type Database = {
           commitment_status_filter?: string
           target_target_filter?: string
           emissions_required?: string
+          tags_filter?: string
         }
         Returns: {
           company_name: string
           slug: string
           company_url: string
           industry: string
+          organization_type: string
+          tags: string
           lei: string
           updated_at: string
           id: string
