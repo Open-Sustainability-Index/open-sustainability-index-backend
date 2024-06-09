@@ -100,7 +100,7 @@ Live API on https://api.opensustainabilityindex.org/
 
 	SELECT * FROM companies(
 		0,                  -- offset_value
-		400,                -- limit_value
+		20,                 -- limit_value
 		'name',             -- sort_by
 		'asc',              -- sort_order
 		--  'Technology',   -- industry_filter
