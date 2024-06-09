@@ -21,7 +21,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
 
   const emissions_required = url.searchParams.get('required')?.includes('emissions') ? 'required' : undefined
 
-  const tags = url.searchParams.get('tags') ?? undefined
+  const tags_filter = url.searchParams.get('tags') ?? undefined
 
   let commitment_type_filter,
     commitment_status_filter,
@@ -51,7 +51,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
       commitment_status_filter,
       target_target_filter,
       emissions_required,
-      tags,
+      tags_filter,
     })
 
   return {
