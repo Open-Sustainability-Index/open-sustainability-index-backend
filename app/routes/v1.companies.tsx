@@ -137,6 +137,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
   const filterIndustry = url.searchParams.get('industry')
   const filterNearTerm = url.searchParams.get('near-term')
   const filterNetZero = url.searchParams.get('net-zero')
+  const tags_filter = url.searchParams.get('tags') ?? undefined
 
   const limit_value = limitQueryString ? parseInt(limitQueryString) : 99
   const offset_value = offsetQueryString ? parseInt(offsetQueryString) : 0
@@ -172,6 +173,7 @@ export async function loader ({ request }: { LoaderFunctionArgs }) {
       commitment_type_filter,
       commitment_status_filter,
       target_target_filter,
+      tags_filter,
     })
 
   return {
