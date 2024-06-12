@@ -6,9 +6,12 @@
   "type": "module",
   "scripts": {
     "genopenapi": "mkdir public; node swagger.mjs",
-    "gentypes": "cd supabase; npx --yes supabase gen types typescript --local --schema public > ../app/types/supabase/index.d.ts; tsfmt -r ../app/types/supabase/index.d.ts",
+    "gentypes": "cd supabase; npx --yes supabase gen types typescript --local --schema public > ../app/types/supabase/index.d.ts; eslint --fix ../app/types/supabase/index.d.ts",
     "dev": "remix vite:dev",
-    "build": "npm run genopenapi && remix vite:build",
+    "build": "npm run lint && npm run genopenapi && remix vite:build",
+    "clean": "rm -rf build; rm -rf public/build; echo Cleaned build directories\n",
+    "lint": "npm run clean && eslint .",
+    "fix": "npm run clean && eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1",
     "supabase": "npx supabase stop --project-id basejump-climate && npx supabase start"
   },
@@ -16,9 +19,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@remix-run/node": "^2.9.1",
-    "@remix-run/react": "^2.9.1",
-    "@remix-run/serve": "^2.9.1",
+    "@remix-run/node": "^2.9.2",
+    "@remix-run/react": "^2.9.2",
+    "@remix-run/serve": "^2.9.2",
     "@supabase/ssr": "^0.3.0",
     "@supabase/supabase-js": "^2.42.7",
     "googleapis": "^105.0.0",
@@ -28,7 +31,11 @@
     "swagger-jsdoc": "^6.2.8"
   },
   "devDependencies": {
-    "@remix-run/dev": "^2.9.1",
+    "@remix-run/dev": "^2.9.2",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "prettier": "3.3.2",
+    "typescript-eslint": "^7.13.0",
     "vite": "^5.2.9"
   }
 }
