@@ -1,12 +1,9 @@
-import {
-  Outlet,
-} from "@remix-run/react";
+import { Outlet } from '@remix-run/react';
 
-export default function App () {
+export default function App(): JSX.Element {
   return (
     <html>
-      <head>
-      </head>
+      <head></head>
       <body>
         <Outlet />
       </body>

@@ -1,5 +1,5 @@
 import { createSupabaseServerClient } from '../supabase.server';
-import { LoaderFunctionArgs } from "@remix-run/node";
+import { LoaderFunctionArgs } from '@remix-run/node';
 import { authenticate } from '../lib/authenticate';
 
 /**
@@ -66,22 +66,21 @@ import { authenticate } from '../lib/authenticate';
  *                   description: Error object if there is any issue with the request
  */
 
-export async function loader ({ request }: { LoaderFunctionArgs }) {
-  const url = authenticate({ request })
-  const query = url.searchParams.get('query')
-  const sort_by = url.searchParams.get('sort') ?? undefined
-  const sort_order = url.searchParams.get('order') ?? undefined
+export async function loader({ request }: LoaderFunctionArgs) {
+  const url = authenticate({ request });
+  const query = url.searchParams.get('query');
+  const sort_by = url.searchParams.get('sort') ?? undefined;
+  const sort_order = url.searchParams.get('order') ?? undefined;
 
-  const { supabaseClient } = createSupabaseServerClient(request)
-  const { data, error } = await supabaseClient
-    .rpc('search', {
-      query,
-      sort_by,
-      sort_order
-    })
+  const { supabaseClient } = createSupabaseServerClient(request);
+  const { data, error } = await supabaseClient.rpc('search', {
+    query,
+    sort_by,
+    sort_order,
+  });
 
   return {
     data,
     error,
-  }
+  };
 }

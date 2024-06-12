@@ -1,5 +1,6 @@
-export function toSlug (str: string): string {
-  return str.trim()
+export function toSlug(str: string): string {
+  return str
+    .trim()
     .toLowerCase()
-    .replace(/ |_|\//g, '-') // space/underscore/slash to dash
+    .replace(/ |_|\//g, '-'); // space/underscore/slash to dash
 }
