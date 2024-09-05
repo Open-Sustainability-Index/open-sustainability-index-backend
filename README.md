@@ -1,43 +1,10 @@
-## Structure
+# Open Sustainability Index (backend)
 
-- /app
-	- /components
-			- /common
-			- /input
-			- /[area specific]
-	- /routes
-		- /api
-	- /hooks (incl context)
-	- /services (business logic)
-	- /utils (smaller utils)
-- /loaders
-		- articles.ts
-- /config
-- /public
-- /db
-	- /migrations
+## Introduction for new contributors
 
-Create folders:
+See the README on https://github.com/Open-Sustainability-Index
 
-	mkdir -p app/components/scenes
-	mkdir -p app/components/page
-	mkdir -p app/components/navigation
-	mkdir -p app/components/common
-	mkdir -p app/components/input
-	mkdir -p app/routes/api
-	mkdir -p app/hooks
-	mkdir -p app/theme
-	touch app/theme/global.css
-	mkdir -p app/services
-	mkdir -p app/utils
-	mkdir -p server/loaders
-	mkdir -p server/actions
-	mkdir -p server/utils
-	mkdir -p config
-	mkdir -p public
-	mkdir -p db/migrations
-
-## To run
+## How to run
 
 	npm run dev
 
@@ -95,6 +62,25 @@ Note: use `&api-key=demo`, or set it as a Bearer token in the header.
 - Search: http://localhost:5173/v1/search?query=Maersk&sort=name&order=asc&api-key=demo
 
 Live API on https://api.opensustainabilityindex.org/
+
+## Structure
+
+- /app
+	- /components
+			- /common
+			- /input
+			- /[area specific]
+	- /routes
+		- /api
+	- /hooks (incl context)
+	- /services (business logic)
+	- /utils (smaller utils)
+- /loaders
+		- articles.ts
+- /config
+- /public
+- /db
+	- /migrations
 
 ## SQL functions
 
