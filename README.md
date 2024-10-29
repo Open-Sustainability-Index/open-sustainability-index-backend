@@ -20,9 +20,9 @@ Take note of `API URL` and `anon key`. You can also use this to get API keys and
 
 ### Development environment
 
-Supabase web admin: http://127.0.0.1:54323/
+Supabase web admin: http://127.0.0.1:54333/
 
-Postgres connection string for TablePlus/Postico: `postgresql://postgres:postgres@localhost:54322/postgres`
+Postgres connection string for TablePlus/Postico: `postgresql://postgres:postgres@localhost:54332/postgres`
 
 ### Get schema and data from cloud database
 
@@ -32,7 +32,7 @@ Postgres connection string for TablePlus/Postico: `postgresql://postgres:postgre
 Get data:
 
 	npx supabase db dump --data-only -f db_data.sql
-	psql --single-transaction --file db_data.sql --dbname 'postgresql://postgres:postgres@localhost:54322/postgres'
+	psql --single-transaction --file db_data.sql --dbname 'postgresql://postgres:postgres@localhost:54332/postgres'
 
 ### Creating migration of database changes from local machine to server
 
