@@ -10,7 +10,7 @@ See the README on https://github.com/Open-Sustainability-Index
 
 ## Set up local Supabase development
 
-	cd ./supabase
+	cd supabase
 
 	npx supabase start
 
@@ -20,19 +20,21 @@ Take note of `API URL` and `anon key`. You can also use this to get API keys and
 
 ### Development environment
 
-Supabase web admin: http://127.0.0.1:54323/
+Supabase web admin: http://127.0.0.1:54333/
 
-Postgres connection string for TablePlus/Postico: `postgresql://postgres:postgres@localhost:54322/postgres`
+Postgres connection string for TablePlus/Postico: `postgresql://postgres:postgres@localhost:54332/postgres`
 
 ### Get schema and data from cloud database
 
 	npx supabase db pull  # Pull down local db schema from cloud db
 	npx supabase db push  # Push up your local db schema to cloud db
 
+Note: If you get “Wrong password” message, add your password with `--password [SUPABASE_PASSWORD]`
+
 Get data:
 
 	npx supabase db dump --data-only -f db_data.sql
-	psql --single-transaction --file db_data.sql --dbname 'postgresql://postgres:postgres@localhost:54322/postgres'
+	psql --single-transaction --file db_data.sql --dbname 'postgresql://postgres:postgres@localhost:54332/postgres'
 
 ### Creating migration of database changes from local machine to server
 
@@ -56,6 +58,7 @@ Note: use `&api-key=demo`, or set it as a Bearer token in the header.
 - Companies:
 	- List: http://localhost:5173/v1/companies?sort=company_name&order=asc&limit=20&offset=0&api-key=demo
 	- List by tag: http://localhost:5173/v1/companies?tags=omx120&api-key=demo
+	- `v2` List: http://localhost:5173/v2/companies?sort=company_name&order=asc&limit=20&offset=0&api-key=demo
 	- Company: http://localhost:5173/v1/companies/ap-moller-maersk?api-key=demo
 	- Company all years: http://localhost:5173/v1/companies/ap-moller-maersk/all-years?api-key=demo
 - Industries: http://localhost:5173/v1/industries?api-key=demo
