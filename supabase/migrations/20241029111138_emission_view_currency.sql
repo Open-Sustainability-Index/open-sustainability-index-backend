@@ -19,6 +19,26 @@
 COMMENT ON COLUMN "public"."emission"."revenue_local" IS 'In millions, in local currency';
 COMMENT ON COLUMN "public"."emission"."revenue" IS 'In millions, in USD';
 
+-- Drop emission fields
+
+ALTER TABLE public.emission
+  DROP COLUMN total_emission_market_based, -- = scope_1 + scope_2_market_based + total_scope_3_calculated
+  DROP COLUMN total_emission_location_based, -- = scope_1 + scope_2_location_based + total_scope_3_calculated
+  DROP COLUMN total_reported_emission_scope_1_2, -- = scope_1 + (scope_2_market_based OR scope_2_location_based OR scope_2_unknown)
+  DROP COLUMN total_reported_emission_scope_1_2_3, -- = total_reported_emission_scope_1_2 + total_scope_3_calculated
+
+  DROP COLUMN upstream_scope_3, -- = SUM of cat1-cat8
+  DROP COLUMN share_upstream_of_scope_3, -- = NULL (remove)
+  DROP COLUMN scope_1_share_of_total_upstream_emissions, -- = NULL (remove)
+  DROP COLUMN total_upstream_emissions, -- = total_reported_emission_scope_1_2 + upstream_scope_3
+
+  DROP COLUMN currency_local, -- just use 'currency'
+  DROP COLUMN revenue, -- = revenue_local * currency_rate
+
+  DROP COLUMN emission_intensity, -- = total_reported_emission_scope_1_2_3 / revenue
+  DROP COLUMN cradle_to_gate; -- = total_upstream_emissions / revenue
+
+
 -- Create table currency_rate
 
 create table "public"."currency_rate" (
