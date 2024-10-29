@@ -11,7 +11,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
 
   const fields = `
   *,
-  emissions:emission(*),
+  emissions:view_emission(*),
   targets:target(*),
   commitment:commitment(*)
 `;
