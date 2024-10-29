@@ -59,12 +59,13 @@ Note: use `&api-key=demo`, or set it as a Bearer token in the header.
 	- List: http://localhost:5173/v1/companies?sort=company_name&order=asc&limit=20&offset=0&api-key=demo
 	- List by tag: http://localhost:5173/v1/companies?tags=omx120&api-key=demo
 	- `v2` List: http://localhost:5173/v2/companies?sort=company_name&order=asc&limit=20&offset=0&api-key=demo
-	- Company: http://localhost:5173/v1/companies/ap-moller-maersk?api-key=demo
-	- Company all years: http://localhost:5173/v1/companies/ap-moller-maersk/all-years?api-key=demo
+	- Company: http://localhost:5173/v1/companies/skf?api-key=demo
+	- Company all years: http://localhost:5173/v1/companies/skf/all-years?api-key=demo
 - Industries: http://localhost:5173/v1/industries?api-key=demo
 - Search: http://localhost:5173/v1/search?query=Maersk&sort=name&order=asc&api-key=demo
 
 Live API on https://api.opensustainabilityindex.org/
+e.g. https://api.opensustainabilityindex.org/v1/companies/skf?api-key=demo
 
 ## Structure
 
