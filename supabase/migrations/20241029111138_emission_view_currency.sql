@@ -26,6 +26,9 @@ create table "public"."currency_rate" (
     "year" integer not null,
     "rate_in_usd" numeric(10,6) not null
 );
+
+COMMENT ON COLUMN "public"."currency_rate"."rate_in_usd" IS '*Average* yearly rate, becase emissions can have happened at any point during the year';
+
 CREATE UNIQUE INDEX currency_rate_pkey ON public.currency_rate USING btree (year, currency_code);
 alter table "public"."currency_rate" add constraint "currency_rate_pkey" PRIMARY KEY using index "currency_rate_pkey";
 alter table "public"."currency_rate" add constraint "currency_rate_rate_in_usd_check" CHECK ((rate_in_usd > (0)::numeric)) not valid;
