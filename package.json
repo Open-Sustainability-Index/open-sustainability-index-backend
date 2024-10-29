@@ -5,15 +5,17 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "genopenapi": "mkdir public; node swagger.mjs",
-    "gentypes": "cd supabase; npx --yes supabase gen types typescript --local --schema public > ../app/types/supabase/index.d.ts; eslint --fix ../app/types/supabase/index.d.ts",
     "dev": "remix vite:dev",
     "build": "npm run lint && npm run genopenapi && remix vite:build",
     "clean": "rm -rf build; rm -rf public/build; echo Cleaned build directories\n",
     "lint": "npm run clean && eslint .",
     "fix": "npm run clean && eslint --fix .",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "supabase": "npx supabase stop --project-id basejump-climate && npx supabase start"
+    "genopenapi": "mkdir public; node swagger.mjs",
+    "gentypes": "cd supabase; npx --yes supabase gen types typescript --local --schema public > ../app/types/supabase/index.d.ts; eslint --fix ../app/types/supabase/index.d.ts",
+    "supabase": "npx supabase stop --project-id basejump-climate && npx supabase start",
+    "diff": "echo '\nTIP: test with «npx supabase db reset»,\n     and run «npm run gentypes», after migration\n\n'; npx supabase db diff -s public,basejump -f",
+    "migration": "sh -c 'mkdir -p supabase/migrations && touch supabase/migrations/$(date +\"%Y%m%d%H%M%S\")_NEWMIGRATION.sql'"
   },
   "keywords": [],
   "author": "",
