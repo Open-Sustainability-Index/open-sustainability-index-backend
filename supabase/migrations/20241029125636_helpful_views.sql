@@ -14,7 +14,7 @@ CREATE OR REPLACE VIEW view_countries AS
   ORDER BY hq_country;
 
 CREATE OR REPLACE VIEW view_currencies AS
-  SELECT DISTINCT UPPER(currency_local)
+  SELECT DISTINCT UPPER(currency)
   FROM emission
-  WHERE currency_local IS NOT NULL
-  ORDER BY UPPER(currency_local);
+  WHERE currency IS NOT NULL
+  ORDER BY UPPER(currency);

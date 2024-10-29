@@ -116,8 +116,8 @@ CREATE OR REPLACE VIEW view_emission AS
     e.revenue_local * cr.rate_in_usd AS revenue,
 
     -- Intensity calculations
-    (COALESCE( (e.cat_1 + e.cat_2 + e.cat_3 + e.cat_4 + e.cat_5 + e.cat_6 + e.cat_7 + e.cat_8 + e.cat_9 + e.cat_10 + e.cat_11 + e.cat_12 + e.cat_13 + e.cat_14 + e.cat_15), e.total_scope_3 ) + e.scope_1 + COALESCE(e.scope_2_market_based, e.scope_2_location_based, e.scope_2_unknown)) / NULLIF(e.revenue * cr.rate_in_usd, 0) AS emission_intensity,
-    (e.scope_1 + COALESCE(e.scope_2_market_based, e.scope_2_location_based, e.scope_2_unknown) + (e.cat_1 + e.cat_2 + e.cat_3 + e.cat_4 + e.cat_5 + e.cat_6 + e.cat_7 + e.cat_8)) / NULLIF(e.revenue * cr.rate_in_usd, 0) AS cradle_to_gate,
+    (COALESCE( (e.cat_1 + e.cat_2 + e.cat_3 + e.cat_4 + e.cat_5 + e.cat_6 + e.cat_7 + e.cat_8 + e.cat_9 + e.cat_10 + e.cat_11 + e.cat_12 + e.cat_13 + e.cat_14 + e.cat_15), e.total_scope_3 ) + e.scope_1 + COALESCE(e.scope_2_market_based, e.scope_2_location_based, e.scope_2_unknown)) / NULLIF(e.revenue_local * cr.rate_in_usd, 0) AS emission_intensity,
+    (e.scope_1 + COALESCE(e.scope_2_market_based, e.scope_2_location_based, e.scope_2_unknown) + (e.cat_1 + e.cat_2 + e.cat_3 + e.cat_4 + e.cat_5 + e.cat_6 + e.cat_7 + e.cat_8)) / NULLIF(e.revenue_local * cr.rate_in_usd, 0) AS cradle_to_gate,
 
     -- Other fields
     e.ghg_standard,
