@@ -72,3 +72,15 @@ VALUES
   ('ap-moller-maersk', 'Target', 'Standard', NULL, NULL, NULL, 'CY', '2024-02-08', '2024-06-03 11:55:36.578984+00', '2024-06-03 11:55:36.578984+00'),
   ('skf', 'Target', 'Standard', NULL, NULL, NULL, 'CY', '2023-03-09', '2024-06-03 11:55:36.653458+00', '2024-06-03 11:55:36.653458+00'),
   ('maersk-contract-logistics-management-asia', 'Target', 'Standard', NULL, NULL, NULL, 'CY', '2024-03-21', '2024-06-03 11:55:44.36375+00', '2024-06-03 11:55:44.36375+00');
+
+-- currency_rate (Google: “1 SEK in USD”)
+INSERT INTO "public"."currency_rate"
+  ("currency_code", "year", "rate_in_usd")
+VALUES
+  ('USD', 2024, 1.00),
+  ('EUR', 2024, 1.08),
+  ('GBP', 2024, 1.30),
+  ('CHF', 2024, 1.15),
+  ('DKK', 2024, 0.14),
+  ('NOK', 2024, 0.091),
+  ('SEK', 2024, 0.094);
