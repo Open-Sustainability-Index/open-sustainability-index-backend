@@ -10,7 +10,7 @@ See the README on https://github.com/Open-Sustainability-Index
 
 ## Set up local Supabase development
 
-	cd ./supabase
+	cd supabase
 
 	npx supabase start
 
@@ -28,6 +28,8 @@ Postgres connection string for TablePlus/Postico: `postgresql://postgres:postgre
 
 	npx supabase db pull  # Pull down local db schema from cloud db
 	npx supabase db push  # Push up your local db schema to cloud db
+
+Note: If you get “Wrong password” message, add your password with `--password [SUPABASE_PASSWORD]`
 
 Get data:
 
